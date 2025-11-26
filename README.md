@@ -151,87 +151,33 @@ Analisar Pull Requests (PRs) de projetos acadêmicos de Engenharia de Software c
 
 ### 4.1 Escopo funcional / de processo (incluído e excluído)
 
-Este experimento foca na fase de integração e validação do código no fluxo de desenvolvimento, utilizando a criação e o tratamento de Pull Requests (PRs) como evento central.
+Analisar Pull Requests (PRs) em projetos acadêmicos de Engenharia de Software  
+com o propósito de **comparar e avaliar**  
+com respeito à **qualidade do código introduzido**, **densidade de defeitos pós-integração**, **eficiência do fluxo de trabalho** e **percepção dos participantes**  
+do ponto de vista de **estudantes (desenvolvedores e revisores)** e **educadores**  
+no contexto de **equipes acadêmicas que utilizam GitHub para desenvolvimento colaborativo**, contrastando **projetos com Code Review obrigatório** versus **projetos sem obrigatoriedade de revisão**.
 
-**INCLUÍDO no experimento:**
+---
 
-- **Atividades cobertas:**
-  - Desenvolvimento de código em branches feature separados do branch principal  
-  - Criação e submissão de Pull Requests para integração de funcionalidades  
-  - Processo de Code Review por pares (apenas no grupo experimental)  
-  - Discussão técnica através de comentários nos PRs  
-  - Aprovação/reprovação de PRs com base em critérios estabelecidos  
-  - Merge de PRs aprovados ao branch principal (main/master)  
-  - Correções e ajustes solicitados durante a revisão  
-  - Acompanhamento de bugs reportados após o merge  
+### INCLUÍDO no experimento
 
-- **Artefatos analisados:**
-  - Código-fonte de todas as funcionalidades desenvolvidas durante o experimento  
-  - Pull Requests completos (título, descrição, diff de código, metadados)  
-  - Comentários de revisão (review comments, sugestões, aprovações)  
-  - Commits individuais associados aos PRs  
-  - Issues do GitHub relacionadas aos PRs (bugs, melhorias)  
-  - Relatórios de análise estática de código (SonarQube, linters)  
-  - Logs de atividade do GitHub (timestamps, participantes)  
-  - Respostas aos questionários pré e pós-experimento  
+| Categoria              | Detalhamento |
+|------------------------|-------------|
+| **Atividades Cobertas** | Desenvolvimento de código em feature branches, criação e submissão de PRs, processo de Code Review por pares (no Grupo B), discussão técnica nos PRs, aprovação/reprovação de PRs, merge de PRs aprovados, correções e ajustes solicitados durante a revisão e acompanhamento de bugs reportados após o merge. |
+| **Artefatos Analisados** | Código-fonte de todas as funcionalidades desenvolvidas, Pull Requests completos (incluindo metadados, diff de código), comentários de revisão, commits individuais, relatórios de análise estática (linters), logs de atividade do GitHub e respostas aos questionários pré e pós-experimento. |
+| **Módulos/Funcionalidades** | Todas as funcionalidades de backend e frontend desenvolvidas (APIs, lógica, interfaces, componentes), implementação de testes unitários e de integração, correções de bugs e refatorações realizadas. |
 
-- **Equipes participantes:**
-  - Equipes de 4 a 6 estudantes de Engenharia de Software  
-  - Projetos desenvolvidos em disciplinas de desenvolvimento colaborativo  
-  - Total estimado de 8 a 12 equipes (40 a 60 participantes)  
-  - Estudantes do 6º ao 8º período do curso  
-  - Equipes já formadas no início do semestre pela disciplina  
+---
 
-- **Módulos/Funcionalidades:**
-  - Todas as funcionalidades de backend desenvolvidas (APIs, lógica de negócio, acesso a dados)  
-  - Todas as funcionalidades de frontend desenvolvidas (interfaces, componentes, integração)  
-  - Correções de bugs implementadas durante o semestre  
-  - Refatorações de código realizadas após entregas iniciais  
-  - Implementação de testes unitários e de integração  
+### EXCLUÍDO do experimento
 
-**EXCLUÍDO do experimento:**
+| Categoria                 | Detalhamento |
+|---------------------------|-------------|
+| **Atividades Não Cobertas** | Commits diretos ao branch principal (bloqueados), processos de planejamento de sprints e cerimônias ágeis, atividades de levantamento de requisitos e definição de escopo, processos de deploy, CI/CD e operação do sistema, e comunicação externa ao GitHub (e.g., WhatsApp, e-mail). |
+| **Artefatos Não Analisados** | Documentação externa ao repositório (wikis, documentos de requisitos), artefatos de design e arquitetura (diagramas UML), planos de projeto e relatórios de entrega. |
+| **Tipos de Código Excluídos** | Configurações de infraestrutura (Dockerfiles, CI/CD configs), arquivos de dados estáticos, dependências de terceiros e código gerado automaticamente por ferramentas. |
+| **Medições Não Realizadas** | Performance em runtime da aplicação, experiência de usuários finais, impacto financeiro, segurança em ambiente de produção real e escalabilidade do sistema. |
 
-- **Atividades não cobertas:**
-  - Commits diretos ao branch principal (serão tecnicamente bloqueados por branch protection)  
-  - Processos de planejamento de sprints, reuniões de equipe e cerimônias ágeis  
-  - Atividades de levantamento de requisitos e definição de escopo  
-  - Configuração inicial de ambiente de desenvolvimento  
-  - Processos de deploy, CI/CD e operação do sistema  
-  - Atividades de design de interface (Figma, protótipos) não relacionadas ao código  
-  - Comunicação externa ao GitHub (mensagens em WhatsApp, Discord, e-mail)  
-
-- **Artefatos não analisados:**
-  - Documentação externa ao repositório (Google Docs, wikis separadas)  
-  - Artefatos de design e arquitetura (diagramas UML, modelos conceituais)  
-  - Planos de projeto e cronogramas  
-  - Relatórios de entregas para os professores  
-  - Apresentações e slides de defesa dos projetos  
-  - Contratos e acordos de equipe  
-
-- **Tipos de código excluídos:**
-  - Configurações de infraestrutura (Dockerfiles, CI/CD configs) – análise simplificada  
-  - Arquivos de dados estáticos (JSONs de mock, fixtures)  
-  - Dependências de terceiros (node_modules, venv)  
-  - Código gerado automaticamente por ferramentas  
-
-- **Participantes excluídos:**
-  - Alunos que desistirem da disciplina antes da semana 4  
-  - Equipes que desenvolverem projetos individuais ao invés de colaborativos  
-  - Projetos de outras instituições ou cursos  
-  - Estudantes que não concordarem com o Termo de Consentimento  
-
-- **Medições não realizadas:**
-  - Performance em runtime da aplicação (tempo de resposta, throughput)  
-  - Experiência de usuários finais ou stakeholders externos  
-  - Impacto financeiro ou de negócio (não aplicável em contexto acadêmico)  
-  - Segurança em ambiente de produção real  
-  - Escalabilidade do sistema desenvolvido  
-  - Métricas de satisfação de cliente (não há cliente real)  
-
-- **Contextos não cobertos:**
-  - Projetos de outras disciplinas ou semestres posteriores  
-  - Desenvolvimento profissional (estágios, trabalhos) dos participantes  
-  - Contribuições open source externas aos projetos da disciplina  
 
 ### 4.2 Contexto do estudo (tipo de organização, projeto, experiência)
 - **Tipo de Organização:** Instituição de Ensino Superior (IES) em nível de Graduação.  
