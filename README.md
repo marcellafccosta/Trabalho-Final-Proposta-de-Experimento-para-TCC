@@ -415,3 +415,166 @@ O Contrabalanço não é aplicável neste desenho, pois ele é usado em desenhos
   - Grupo B (Experimental): Code Review obrigatório.  
 
 O experimento será executado ao longo de um único período contínuo de 16 semanas (Restrição R1), que engloba o semestre letivo completo. Dentro desse intervalo, a intervenção propriamente dita, isto é, a aplicação da regra de branch protection no grupo experimental, permanecerá ativa durante todo o período de desenvolvimento efetivo, estimado em aproximadamente 12 a 14 semanas. As “sessões” de trabalho são os ciclos de desenvolvimento (sprints semanais ou quinzenais) nos quais as equipes criam e fazem merge de Pull Requests. O número de PRs gerados ao longo desses ciclos (estimado entre 60 e 80 PRs no total) é o que definirá, na prática, o tamanho amostral disponível para análise estatística. A coleta contínua durante todo o semestre permite capturar a dinâmica completa de desenvolvimento das equipes e o efeito da maturação dos participantes (L2) em ambos os grupos, produzindo um retrato mais realista do impacto do Code Review na qualidade do software em um contexto de projeto acadêmico de médio prazo.
+
+
+
+## 10. População, Sujeitos e Amostragem
+
+### 10.1 População-alvo
+
+A população-alvo deste experimento compreende **desenvolvedores juniores** em estágios iniciais de carreira ou equipes com **baixa maturidade de processo**, atuando em contextos colaborativos com foco em qualidade e compartilhamento de conhecimento entre pares.  
+Mais especificamente, **estudantes de graduação** em Engenharia de Software ou Ciência da Computação, envolvidos em **projetos colaborativos de médio prazo com uso de versionamento distribuído**.
+
+### 10.2 Critérios de Inclusão
+
+Os participantes devem atender aos seguintes critérios mínimos:
+
+- **Vínculo Acadêmico:** Estar regularmente matriculado em disciplinas da IES parceira que envolvam projetos colaborativos.
+- **Papel:** Estar alocado em uma equipe de desenvolvimento (3 a 6 alunos).
+- **Conhecimento Técnico (P3):** Possuir conhecimento funcional de Git (commit, push, pull, branch, merge).
+- **Consentimento Ético (P1):** Concordar com a participação voluntária e assinar o **Termo de Consentimento Livre e Esclarecido (TCLE)**.
+- **Disponibilidade:** Participar ativamente durante o semestre (16 semanas – R1).
+
+### 10.3 Critérios de Exclusão
+
+- Recusa em assinar o TCLE.
+- Experiência profissional **sênior** ou mais de **5 anos de experiência na indústria**.
+- Conflito de interesses (ex.: monitor da disciplina com papel avaliativo).
+
+### 10.4 Tamanho da Amostra Planejado (por Grupo)
+
+O tamanho da amostra é uma limitação (R2) definida pela disponibilidade de turmas no semestre.
+
+- **Unidade de Análise (PRs):** Mínimo de **60 a 80 PRs** no total (30–40 por grupo), garantindo **poder estatístico razoável** (Cohen's d ≥ 0,5).  
+- **Unidade de Alocação (Equipes):** De **4 a 6 equipes** no total (2–3 por grupo).  
+- **Participantes (Sujeitos):** De **12 a 18 sujeitos por grupo**, totalizando entre **24 e 36 participantes**, conforme o tamanho das equipes.
+
+>  A decisão é baseada na viabilidade (R2) e no princípio de maximizar o número de observações (PRs) dentro das restrições temporais e logísticas.
+
+### 10.5 Método de Seleção / Recrutamento
+
+A seleção será feita por **amostragem por conveniência** (não probabilística).
+
+Os participantes serão recrutados a partir de turmas de disciplinas específicas do curso de Engenharia de Software da IES parceira que realizam projetos colaborativos obrigatórios. O Pesquisador Principal fará o convite formal, com o apoio do(s) professor(es) da disciplina. A alocação das equipes aos grupos (Controle vs. Experimental) será feita por randomização (Seção 9.2).
+
+
+### 10.6 Treinamento e Preparação dos Sujeitos
+
+Para garantir nivelamento e reduzir viés técnico:
+
+- Todos os participantes (Grupos A e B) participarão de um **workshop inicial padronizado** (P3).
+- **Duração:** 1–2 horas.
+- **Conteúdo:**
+  - Fluxo de trabalho de **Pull Request no GitHub**.
+  - Princípios de **Code Review Pedagógico**: foco em manutenibilidade, padrões e feedback construtivo (Q4.3).
+  - Regras de codificação e boas práticas (P3).
+
+> Objetivo: Garantir que o Grupo Controle (A), mesmo sem obrigatoriedade, siga boas práticas ao realizar revisões espontâneas. Assim, isola-se o efeito da **obrigatoriedade via branch protection**, e não apenas da prática em si.
+
+
+---
+
+## 11. Instrumentação e Protocolo Operacional
+
+### 11.1 Instrumentos de Coleta (questionários, logs, planilhas, etc.)
+
+| Instrumento                 | Categoria de Dados                 | Variáveis / Métricas (Ex.)                                      | Fonte de Dados                              |
+|----------------------------|------------------------------------|------------------------------------------------------------------|---------------------------------------------|
+| GitHub API (Scripts)       | Eficiência / Interação / Produtividade | M11 (Tempo Merge), M13 (Comentários), M15 (Throughput)          | Extração Automatizada (P2)                  |
+| Análise Estática de Código | Qualidade Técnica / Segurança      | M01 (Complexidade), M05 (Manutenibilidade), M10 (Vulnerabilidades) | SonarQube / ESLint / Pylint (R3)           |
+| Questionário Inicial       | Variáveis de Controle              | Experiência, Familiaridade com Git/GitHub                        | Formulário Digital (Google Forms)          |
+| Questionário Pós-Experimento | Percepção Subjetiva             | M17 (Aprendizado), M19 (Sobrecarga), M20 (Qualidade Comentários) | Formulário Digital (Google Forms)          |
+| Rastreamento de Issues     | Confiabilidade / Defeitos          | M07 (Densidade Defeitos), M09 (Severidade Crítica)               | Análise e Classificação de Issues do GitHub |
+
+
+
+### 11.2 Materiais de Suporte (instruções, guias)
+
+- **TCLE:** Documento de consentimento (P1).
+- **Guia de Workflow e Regras:** Instruções detalhando o fluxo de desenvolvimento do projeto e as convenções de código (P3).
+- **Manual da Regra de Merge:** Especificação clara da diferença entre:
+  - Processo do **Grupo A** (opcional).
+  - Processo do **Grupo B** (obrigatoriedade de 1 aprovação).
+
+---
+
+### 11.3 Procedimento Experimental (protocolo – visão passo a passo)
+
+O experimento será dividido em fases operacionais ao longo das 16 semanas.
+
+**Pré-Execução (Semanas 1–2)**  
+- Obtenção da Aprovação Ética (CEP) e TCLE (P1).  
+- Aplicação do Questionário Inicial (Variáveis de Controle).  
+- Randomização das Equipes em Grupo A e B (Seção 9.2).  
+- Treinamento Padrão de 1–2h (Seção 10.6).  
+- Configuração dos Repositórios: aplicação da **Branch Protection Rule** no Grupo B (P2).
+
+**Execução (Semanas 3–15)**  
+- Desenvolvimento de features e submissão de PRs.  
+- **Grupo A (Controle):** PRs mergeados livremente.  
+- **Grupo B (Tratamento):** PRs bloqueados sem pelo menos 1 aprovação de par.  
+- **Coleta Contínua Automatizada:** scripts extraem dados da API e das ferramentas estáticas a cada merge ou período definido.
+
+**Pós-Execução (Semana 16)**  
+- Aplicação do Questionário Pós-Experimento (Percepção M17–M20).  
+- Classificação manual dos bugs (M09) e consolidação final de todos os dados.  
+- Análise estatística (Seção 12).
+
+<img width="364" height="1072" alt="diagramamedicaoooo" src="https://github.com/user-attachments/assets/5b8a6922-4d8d-413a-9abc-b246c4aea1d5" />
+
+
+
+### 11.4 Plano de Piloto (escopo e critérios de ajuste)
+
+Será realizado um piloto de curta duração (1–2 semanas), envolvendo uma amostra muito pequena de equipes ou alunos de uma turma anterior (se possível), ou nas primeiras semanas do semestre.
+
+**Objetivos do Piloto:**
+- Testar a operacionalização da **Branch Protection Rule** (P2), garantindo que ela não seja contornada.  
+- Validar o funcionamento dos scripts de coleta e a integração com as ferramentas de análise estática (R3).  
+- Avaliar a clareza e o tempo de preenchimento dos questionários (M17–M20).
+
+**Critérios de Ajuste:** O protocolo será ajustado se a taxa de falha na coleta automatizada for superior a 5%, ou se o treinamento não for suficiente para que os alunos do Grupo B entendam suas responsabilidades como revisores.
+
+---
+
+## 12. Plano de Análise de Dados (pré-execução)
+
+### 12.1 Estratégia Geral de Análise (como responderá às questões)
+
+A estratégia central é a **comparação estatística** das métricas de resultado entre o **Grupo A** e o **Grupo B** para validar as hipóteses direcionais (H1).
+
+Os dados coletados serão usados para responder aos objetivos da seguinte forma:
+
+| Objetivo     | Resposta                                                                                                  |
+|-------------|-----------------------------------------------------------------------------------------------------------|
+| Qualidade (O1)  | Comparar média/mediana do **Índice de Manutenibilidade (M05)** e da **Complexidade Ciclomática (M01)** para verificar se o Grupo B é superior/inferior. |
+| Defeitos (O2)   | Comparar a **Densidade de Defeitos (M07)** e a **Proporção de Bugs Críticos (M09)** para verificar se o Code Review obrigatório reduz bugs. |
+| Eficiência (O3) | Comparar o **Tempo Médio até Merge (M11)** e a **Carga de Revisão (M13, M14)** para medir o custo do processo. |
+| Percepção (O4)  | Comparar as **medianas das escalas Likert (M17, M19)** para entender o trade-off percebido entre aprendizado e sobrecarga. |
+
+
+
+### 12.2 Métodos Estatísticos Planejados
+
+| Categoria de Métrica                        | Suposição de Distribuição       | Teste Estatístico Planejado                                                       |
+|--------------------------------------------|----------------------------------|-----------------------------------------------------------------------------------|
+| Quantitativa Contínua (M01, M05, M07, M11) | Normalidade assumida            | **Teste t para amostras independentes** (comparação de médias)                   |
+| Quantitativa Contínua                      | Não-paramétrica / Desconhecida  | **Teste de Mann-Whitney U** (comparação de medianas)                             |
+| Ordinal (M17, M19, M20)                    | Não-paramétrica                 | **Teste de Mann-Whitney U**                                                      |
+| Ajuste de Covariáveis                      | Média ajustada                  | **ANCOVA**, usando **Experiência** e **Tamanho da Equipe** como covariáveis      |
+
+
+### 12.3 Tratamento de Dados Faltantes e Outliers
+
+- **Dados Faltantes (PRs):** PRs que não puderem ser vinculados a uma issue ou que não tenham dados completos de merge serão excluídos por caso da análise específica daquela métrica. A porcentagem de exclusão será rigorosamente documentada.
+
+- **Outliers:** Valores extremos (ex: PRs com tempo de merge de 3 meses, M11) serão identificados. Em vez de excluir, será priorizada a transformação logarítmica ou o uso de testes não-paramétricos (Mann-Whitney U), que são menos sensíveis a outliers, mitigando a perda de poder.
+
+
+### 12.4 Plano de Análise para Dados Qualitativos (se houver)
+
+Os comentários de revisão (M13) e as respostas abertas do questionário serão tratados como **dados qualitativos** para contextualizar os achados quantitativos.
+
+- **Técnica:** Análise de Conteúdo Temática.  
+- **Procedimento:**  Os comentários serão lidos e codificados indutivamente em categorias (ex: "Problema de Padrão", "Sugestão de Design", "Bug Funcional") para verificar se o foco das revisões difere entre o Grupo A e o Grupo B.
+
