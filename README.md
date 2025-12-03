@@ -12,11 +12,13 @@ EXP-ACAD-2025
 
 | Versão | Data       | Alterações                                                  | Autor          |
 |--------|------------|-------------------------------------------------------------|----------------|
-| v1.0   | 21/11/2025 | Criação Inicial do Documento (Identificação Básica, Contexto e Problema) | Marcella Costa |
-
+| v1.0   | 21/11/2025 | Criação Inicial: Identificação Básica (Seções 1-2), Contexto e Problema | Marcella Costa |
+| v1.1   | 25/11/2025 | Escopo e Contexto (Seção 4), Objetivos e Questões GQM (Seção 3), Stakeholders e Impacto (Seção 5), Riscos e Critérios de Sucesso (Seção 6) | Marcella Costa |
+| v1.2   | 28/11/2025 |  Modelo Conceitual e Hipóteses (Seção 7), Variáveis e Tratamentos (Seção 8), Desenho Experimental (Seção 9) | Marcella Costa |
+| v1.3   | 02/12/2025 | População e Amostragem (Seção 10), Instrumentação (Seção 11), Plano de Análise (Seção 12), Avaliação de Validade (Seção 13) Detalhamento de variáveis de confusão (Seção 8.7) | Marcella Costa |
 ### 1.4 Datas (criação, última atualização)
 - **Criação:** 21/11/2025  
-- **Última atualização:** 28/11/2025
+- **Última atualização:** 02/12/2025
 
 ### 1.5 Autores (nome, área, contato)
 - **Marcella Ferreira Chaves Costa** – Engenharia de Software, PUC Minas  
@@ -261,11 +263,21 @@ Grupos controle e experimental terão distribuição similar de habilidades téc
 - **R5 (Organizacional):** participantes veem o experimento como sobrecarga e não colaboram.
 
 ### 6.2 Critérios de sucesso globais (go / no-go)
-O experimento será considerado viável e útil se:
+O experimento será considerado **viável e útil** se:
 
-- For possível coletar pelo menos **30 PRs analisáveis no total** (mínimo de 15 PRs por grupo).  
-- Os participantes aderirem aos protocolos (obrigatoriedade de review, preenchimento de formulários, vinculação de issues).  
-- Pelo menos uma métrica de qualidade (por exemplo, bugs, score percebido) indicar melhora com review obrigatório sem custo proibitivo de tempo (aumento de tempo ≤ 25%).
+- For possível coletar **pelo menos 60 PRs analisáveis no total**, com meta de **60–80 PRs**  
+  - **Distribuição mínima:** 30 PRs por grupo (controle e experimental).
+
+- **Critério mínimo de viabilidade (plano B):**  
+  - Coleta de **30 PRs no total** (15 por grupo).  
+  - Nesse cenário, a análise focará **exclusivamente em tamanho de efeito** e será considerada **exploratória**, com **recomendação de replicação futura**.
+
+- Os participantes **aderirem aos protocolos**, incluindo:
+  - Obrigatoriedade de review (no grupo experimental).
+  - Preenchimento dos formulários.
+  - Vinculação adequada de issues.
+
+- Pelo menos **uma métrica de qualidade** (por exemplo, bugs ou score de qualidade percebida) indicar **melhora com review obrigatório**, **sem custo proibitivo de tempo** (aumento de tempo ≤ **25%**).
 
 ### 6.3 Critérios de parada antecipada (pré-execução)
 O experimento deve ser suspenso ou adiado se:
@@ -378,11 +390,14 @@ Os estudantes estarão organizados em equipes de 3 a 6 integrantes (2-3 equipes 
 
 ### 8.7 Possíveis variáveis de confusão conhecidas
 
-| Variável de Confusão          | Como pode distorcer                                        | Estratégia de Mitigação                                              |
-|-------------------------------|------------------------------------------------------------|------------------------------------------------------------------------|
-| Contaminação entre grupos     | Grupo controle adota Code Review voluntariamente           | Monitoramento semanal via API; separação de turmas; análise *as-treated* |
-| Maturação dos participantes   | Estudantes melhoram naturalmente ao longo do semestre      | Grupo controle como baseline; análise de tendência temporal           |
-| Efeito Hawthorne              | Participantes alteram comportamento por serem observados   | Não eliminável, mas ambos grupos são igualmente observados           |
+| Variável de Confusão                         | Como Pode Distorcer o Resultado                                                                                                                                                     | Estratégia de Mitigação no Plano                                                                                                                                                                                                 |
+|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Contaminação entre Grupos (Diffusion of treatment) | O grupo controle (A) pode adotar o Code Review voluntariamente após aprender sobre sua importância no treinamento (10.6) ou observar o grupo experimental (B).                      | **Monitoramento:** Coleta de dados via API para rastrear a taxa de aprovações formais no Grupo A. **Análise:** Uso de análise *as-treated* (o que foi realmente feito) se a contaminação for significativa.                      |
+| Maturação dos Participantes (Maturation)     | Estudantes melhoram naturalmente suas habilidades de programação e Git ao longo do semestre (L2), confundindo o efeito natural com o efeito do CR.                                 | **Controle:** Uso do Grupo Controle (A) como baseline para a melhoria natural. **Modelagem:** Inclusão da covariável “semana do semestre” nos Modelos Mistos (LMM) para controlar a tendência temporal de melhoria.              |
+| Efeito Hawthorne                            | Participantes alteram o comportamento (melhor qualidade ou revisões mais superficiais) por saberem que estão sendo observados (L1).                                                 | **Mitigação:** Não é eliminável, mas é atenuado, pois ambos os grupos são observados igualmente. **Blind parcial:** Os participantes não conhecem todas as hipóteses específicas da pesquisa (apenas o objetivo geral de qualidade). |
+| Complexidade do Projeto                     | Diferenças na complexidade inerente dos projetos (L3) podem causar mais defeitos, independentemente da política de CR.                                                              | **Controle:** Coleta de avaliação docente da complexidade do projeto (escala 1–5) e inclusão como covariável fixa nos modelos de análise (LMM) para ajustar os resultados.                                                       |
+| Experiência Desigual entre Grupos (Selection) | Se o Grupo B tiver, por acaso, desenvolvedores mais experientes, qualquer melhoria na qualidade pode ser atribuída à experiência, e não ao Code Review (P4).                      | **Controle:** Os dados do questionário inicial sobre experiência serão usados em ANCOVA ou como covariável fixa nos LMM, ajustando estatisticamente o efeito da experiência.                                                   |
+| Tamanho Variável do PR                      | PRs muito grandes (que naturalmente têm mais defeitos) ou muito pequenos (L4) distorcem as comparações diretas de contagem de bugs.                                                | **Normalização:** Calcular métricas relativas (ex.: Densidade de Defeitos = bugs/1000 LoC). **Modelagem:** Incluir o tamanho do PR (M16) como covariável nos modelos.                                                            |
 
 ---
 
@@ -553,15 +568,85 @@ Os dados coletados serão usados para responder aos objetivos da seguinte forma:
 | Percepção (O4)  | Comparar as **medianas das escalas Likert (M17, M19)** para entender o trade-off percebido entre aprendizado e sobrecarga. |
 
 
+### 12.2 Métodos estatísticos planejados
 
-### 12.2 Métodos Estatísticos Planejados
+Dado que o desenho experimental envolve **randomização por cluster (equipes)** e que os Pull Requests (PRs) estão **agrupados dentro dessas equipes** (*nested structure*), a análise considerará explicitamente a **estrutura hierárquica dos dados**. Ignorar essa dependência comprometeria a validade de conclusão do estudo.
 
-| Categoria de Métrica                        | Suposição de Distribuição       | Teste Estatístico Planejado                                                       |
-|--------------------------------------------|----------------------------------|-----------------------------------------------------------------------------------|
-| Quantitativa Contínua (M01, M05, M07, M11) | Normalidade assumida            | **Teste t para amostras independentes** (comparação de médias)                   |
-| Quantitativa Contínua                      | Não-paramétrica / Desconhecida  | **Teste de Mann-Whitney U** (comparação de medianas)                             |
-| Ordinal (M17, M19, M20)                    | Não-paramétrica                 | **Teste de Mann-Whitney U**                                                      |
-| Ajuste de Covariáveis                      | Média ajustada                  | **ANCOVA**, usando **Experiência** e **Tamanho da Equipe** como covariáveis      |
+Será adotada uma **abordagem multinível**, com três estratégias complementares para garantir a robustez dos resultados:
+
+#### 12.2.1 Análise primária: Modelos Lineares Mistos (LMM)
+
+Esta é a abordagem mais robusta para **dados agrupados**, aproveitando ao máximo o poder estatístico do conjunto de dados total (60–80 PRs).
+
+- **Estrutura do modelo:**  
+  - Serão utilizados **Modelos Lineares Mistos (LMM)** para métricas contínuas (M01, M05, M07, M11).  
+  - A **Equipe** será incluída como **efeito aleatório (random intercept)**, controlando a não-independência das observações dentro de cada cluster.
+
+- **Controle de covariáveis:**  
+  - Variáveis de controle coletadas no início (Experiência, Tamanho da Equipe) serão incluídas no modelo como **efeitos fixos**, em uma função análoga à **ANCOVA**, ajustando o efeito do tratamento por eventuais desbalanceamentos iniciais.
+
+- **Requisito de uso:**  
+  - Esta abordagem será utilizada como **análise primária** se:
+    - o **N total de PRs for ≥ 60**, e  
+    - houver PRs suficientes por equipe (idealmente **≥ 10 PRs/equipe**).
+
+#### 12.2.2 Análise de sensibilidade: agregação por equipe
+
+Esta abordagem servirá como **análise de validação conservadora** para as métricas mais críticas.
+
+- **Unidade de análise:**  
+  - A unidade de análise será agregada ao nível da **Equipe** (N ≈ 4–6).
+
+- **Teste estatístico:**  
+  - Será utilizado o **Teste de Mann-Whitney U** (não-paramétrico) para comparar as **médias ou medianas agregadas** das métricas entre o **Grupo A** e o **Grupo B**.
+
+- **Função:**  
+  - Embora reduza drasticamente o **poder estatístico**, essa abordagem:
+    - garante **independência completa** das observações; e  
+    - oferece uma interpretação **mais conservadora** dos resultados.
+
+#### 12.2.3 Análise de confirmação: ajuste robusto de erro-padrão
+
+Serão realizados **testes t simples** com **ajuste de erros-padrão robustos por cluster** (*cluster-robust standard errors* – Correção de Huber-White) para:
+
+- **validar os resultados dos LMMs**; e  
+- garantir que a **correção para clustering** está sendo aplicada, mesmo em estruturas multinível mais simples.
+
+#### 12.2.4 Resumo dos métodos por tipo de métrica
+
+| Categoria de Métrica                        | Distribuição         | Método Primário (poder ótimo)                                                           | Método Secundário (conservador)                                       |
+|--------------------------------------------|----------------------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| Quantitativa contínua (M01, M05, M07, M11) | Normal / Desconhecida | **LMM** com efeito aleatório de Equipe (ou **GLMM** com transformação logarítmica)     | Agregação por Equipe + **Mann-Whitney U**                             |
+| Ordinal (Likert) (M17, M19, M20)           | Não-paramétrica      | Agregação por Equipe + **Mann-Whitney U**                                              | Modelo **ordinal misto**, se a distribuição permitir estabilidade     |
+| Ajuste de covariáveis                      | —                    | **LMM** incluindo Experiência e Tamanho da Equipe como variáveis fixas                 | **ANCOVA** após a agregação dos dados por equipe                      |
+
+#### 12.2.5 Critério de decisão em caso de divergência
+
+Em caso de **resultados divergentes** entre:
+
+- a análise **multinível** (LMM), e  
+- a análise **agregada por equipe**,
+
+a interpretação irá:
+
+- **priorizar a análise multinível (LMM)**, por:
+  - ter **maior poder estatístico**; e  
+  - tratar corretamente a **estrutura hierárquica dos dados**;
+
+mas **também reportará** explicitamente o resultado **mais conservador** (agregado).
+
+
+#### 12.2.6 Nota sobre múltiplas comparações e tamanho do efeito
+
+- **Erro Tipo I (falso positivo):**  
+  Dado o total de **≈12 testes de hipóteses**, há risco de **inflação do Erro Tipo I**. Assim:
+  - os **valores de p serão interpretados com cautela**;  
+  - será priorizada a **consistência dos resultados** entre métricas relacionadas, em vez de foco exclusivo em significância isolada.
+
+- **Erro Tipo II (falso negativo):**  
+  Para mitigar o risco de não detectar efeitos relevantes:
+  - serão reportados **tamanhos de efeito** (por exemplo, **Cohen’s d** ou **Cliff’s Delta**);  
+  - será destacada a **relevância prática** das descobertas, complementando os testes de significância estatística.
 
 
 ### 12.3 Tratamento de Dados Faltantes e Outliers
@@ -578,3 +663,515 @@ Os comentários de revisão (M13) e as respostas abertas do questionário serão
 - **Técnica:** Análise de Conteúdo Temática.  
 - **Procedimento:**  Os comentários serão lidos e codificados indutivamente em categorias (ex: "Problema de Padrão", "Sugestão de Design", "Bug Funcional") para verificar se o foco das revisões difere entre o Grupo A e o Grupo B.
 
+---
+
+## 13. Avaliação de validade (ameaças e mitigação)
+
+### 13.1 Validade de conclusão
+
+Refere-se à capacidade de inferir corretamente se o **Code Review obrigatório** e as **métricas de Qualidade/Eficiência** estão relacionados, sem erro.
+
+| Ameaça                   | Descrição do Risco                                                                                                                                             | Estratégia de Mitigação                                                                                                                                               |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Baixo Poder Estatístico  | O tamanho amostral limitado (R2) de 60–80 PRs no total pode não ser suficiente para detectar efeitos reais de magnitude pequena ou moderada.                    | **Mitigação principal:** Focar a análise no **tamanho do efeito** (ex.: Cohen's d ou Cliff's Delta) e não apenas no valor de *p*, conforme definido na Seção 7.3.     |
+| Violação de Suposições   | Os dados de processo (Tempo de Merge, Densidade de Defeitos) e os dados de código geralmente não seguem uma distribuição normal.                                | **Estratégia:** Priorizar **testes não-paramétricos** (ex.: Mann-Whitney U) e usar **transformação logarítmica** em métricas de tempo.                               |
+| Pesca e Taxa de Erro     | Múltiplos testes de hipóteses (12 no total) aumentam a chance de encontrar um resultado falso-positivo por acaso (inflação do Erro Tipo I).                    | **Mitigação:** Interpretar os valores de *p* com cautela e exigir **consistência de resultados entre métricas relacionadas** (ex.: Q1.1 e Q1.3).                      |
+
+### 13.2 Validade interna
+
+Refere-se à **confiança de que o tratamento (CR obrigatório)** foi a principal causa das mudanças nas respostas, controlando causas alternativas.
+
+| Ameaça                           | Descrição do Risco                                                                                                                                     | Estratégia de Mitigação                                                                                                                                                                           |
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Maturação (L2)                   | A melhoria das habilidades dos estudantes ao longo do semestre (aprendizado natural) pode ser confundida com o efeito do Code Review.                 | Uso do **Grupo Controle (A)** para estabelecer a **baseline de melhoria natural**.                                                                                                                |
+| Seleção (L3)                     | Diferenças pré-existentes (experiência, coesão da equipe) entre o Grupo A e o Grupo B.                                                                | **Estratégia principal:** Randomização das equipes (Seção 9.2) e uso de **ANCOVA** para ajustar os resultados com base nas variáveis de controle (Experiência) coletadas no questionário inicial. |
+| Difusão / Imitação do Tratamento | O Grupo Controle (A) adota o Code Review obrigatório por iniciativa própria, após aprender sobre ele no treinamento (10.6) ou observar o Grupo B.     | **Tática:** Monitoramento via API para rastrear a taxa de aprovação formal de PRs no Grupo A. Análise usando abordagem **as-treated** (o que foi feito) se a contaminação for alta.               |
+| Instrumentação                   | Mudanças no método de coleta de dados ao longo do tempo (ex.: o linter muda de versão, alterando as métricas de qualidade).                           | **Controle:** Utilizar **versões fixas das ferramentas de análise estática** (P2) e garantir a **estabilidade dos scripts de coleta** via GitHub API.                                             |
+
+### 13.3 Validade de constructo
+
+Refere-se à certeza de que as **métricas escolhidas** representam adequadamente os **conceitos teóricos** subjacentes (Qualidade, Eficiência, Aprendizado).
+
+| Ameaça                                          | Descrição do Risco                                                                                                             | Estratégia de Mitigação                                                                                                                                                     |
+|------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Explicação Pré-Operacional Inadequada dos Construtos | O conceito de “Qualidade” pode ser mal representado se considerado apenas pela complexidade ciclomática.                    | **Mitigação:** Uso de **triangulação** e **modelagem multimétrica**: Qualidade é medida por (M01, M05, M07, M18). Manutenibilidade (M05) é um índice mais robusto.           |
+| Viés de Mono-Operação                          | Confiar em apenas uma fonte de dados (ex.: apenas GitHub API).                                                                | **Estratégia:** Uso de **múltiplas operações** para medir Qualidade: Dados do GitHub API (processo) + Análise estática (código) + Questionários (percepção).               |
+| Suposição de Hipótese                          | Participantes tentam adivinhar o resultado esperado (melhoria da qualidade com CR) e ajustam seu comportamento (Efeito Hawthorne L1). | **Mitigação:** Uso de **Grupo Controle (A)**, que também sabe que está sendo observado. Foco no processo (revisão formal) e não apenas no resultado.                        |
+| Expectativa do Experimentador                  | O pesquisador pode influenciar sutilmente os resultados ou a classificação manual (ex.: classificação de bugs M09).          | **Controle:** Padronização rigorosa na **classificação de Issues (M09)** e uso de **métricas automatizadas (M01–M11)** para a maioria dos resultados, reduzindo subjetividade. |
+
+### 13.4 Validade externa
+
+Discute a **aplicabilidade dos resultados** a outros contextos, populações e cenários.
+
+| Contexto de Limitação                    | Descrição do Risco                                                                                       | Generalização e Limitação                                                                                                     |
+|-----------------------------------------|----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Interação da Seleção e do Tratamento    | Os resultados obtidos com desenvolvedores juniores (população selecionada) podem não se aplicar a sêniores. | **Limitação:** Achados mais fortes para **equipes iniciantes/juniores** e contextos de aprendizado.                           |
+| Interação da Situação e do Tratamento   | O experimento ocorre em contexto didático (baixa criticidade), não em ambiente de produção real.         | **Limitação:** Resultados podem não se estender a projetos de **alta criticidade** ou com forte **pressão comercial**.        |
+| Interação da História e do Tratamento   | Os resultados podem ser específicos do ano acadêmico/currículo atual.                                   | **Generalização:** Aplica-se a ambientes que usam **Git Flow, Pull Request e metodologias ágeis** em projetos de médio porte. |
+
+---
+
+### 13.5 Resumo das principais ameaças e estratégias de mitigação
+
+A tabela a seguir consolida as **ameaças mais críticas** e as **ações primárias de controle**.
+
+| Ameaça Crítica                 | Tipo de Validade Afetada | Estratégia Principal de Mitigação                                                                                 |
+|--------------------------------|---------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Baixo Poder Estatístico        | Conclusão                | Relatório do **tamanho do efeito** e da **relevância prática** (Seção 7.3).                                      |
+| Seleção / Desbalanceamento     | Interna                  | **Randomização das equipes** e uso de **ANCOVA** para controle da Experiência.                                   |
+| Maturação                      | Interna                  | Uso do **Grupo Controle** como baseline para melhoria natural (L2).                                              |
+| Difusão do Tratamento (Contaminação) | Interna          | Monitoramento **as-treated** (análise do que foi realmente revisado).                                            |
+| Ambiguidade de Construto       | Construto                | **Triangulação** entre métricas de código (M05) e dados de percepção (M18).                                      |
+| População Júnior               | Externa                  | Qualificação dos resultados para **equipes de baixa maturidade** (desenvolvedores juniores e contextos didáticos). |
+
+---
+
+## 14. Ética, privacidade e conformidade
+
+### 14.1 Questões éticas (uso de sujeitos, incentivos, etc.)
+
+O experimento, por envolver estudantes em um contexto de avaliação acadêmica, apresenta questões éticas que exigem tratamento rigoroso. A principal preocupação é a **pressão indevida para participar**.
+
+Será garantido que:
+
+- A decisão do estudante em **não participar** ou em **se retirar a qualquer momento** **não afetará**:
+  - sua **nota** na disciplina; nem
+  - seu **relacionamento** com professores e orientadores.
+
+Outra questão crítica é a **confusão de papéis**:
+
+- O **Pesquisador Principal** **não será** o professor avaliador direto da disciplina, evitando que os estudantes sintam que os dados da pesquisa serão usados para fins de **avaliação acadêmica**.
+
+Sobre incentivos:
+
+- Não serão oferecidos **incentivos financeiros diretos**.
+- O benefício será focado no **valor educacional** do workshop de Code Review e no **aprendizado prático** de um processo de desenvolvimento maduro.
+
+Risco de sobrecarga:
+
+- O risco de **sobrecarga de trabalho (R5)**, embora inerente ao Grupo B, será **mitigado pelo monitoramento** da **Percepção de Sobrecarga (M19)**.
+
+
+### 14.2 Consentimento informado
+
+Os participantes serão informados de forma **detalhada e transparente** por meio do **Termo de Consentimento Livre e Esclarecido (TCLE)**.
+
+- **Informações Essenciais:**  
+  O TCLE cobrirá explicitamente:
+  - os **objetivos** (comparar Code Review obrigatório vs. opcional);
+  - os **procedimentos** (uso da Branch Protection Rule no Grupo B);
+  - os **riscos** (mínimos, principalmente sobrecarga de tempo); e
+  - os **benefícios** (aprendizado de *soft skills* e *hard skills*).
+
+- **Voluntariedade e Retirada:**  
+  Será enfatizado que:
+  - a participação é **voluntária**; e
+  - o participante tem o **direito incondicional** de se retirar do estudo a qualquer momento,  
+    - sem necessidade de justificativa;  
+    - sem qualquer penalidade.
+
+- **Registro do Consentimento:**  
+  - O consentimento será registrado **digitalmente** (por exemplo, via formulário eletrônico seguro da IES).
+  - A coleta de dados **só começará** após o registro do TCLE (**P1**).
+
+
+### 14.3 Privacidade e proteção de dados
+
+A pesquisa adotará o princípio da **pseudonimização** para proteger a identidade dos participantes.
+
+**Dados Coletados e Tratamento:**
+
+- **Identificação Pessoal (PII):**  
+  - Nomes e e-mails dos participantes (coletados para o TCLE e vínculo com o GitHub) serão armazenados em um **repositório separado e criptografado**.
+
+- **Dados de Percepção (M17–M20):**  
+  - Serão coletados de forma **anônima** ou vinculados apenas ao **ID da equipe/participante**,  
+    sem ligação direta com a identidade no momento da análise.
+
+- **Dados Técnicos (PRs / Métricas):**  
+  - Commits, métricas de código (M01–M16) e comentários serão vinculados a um **ID alfanumérico (pseudônimo)**,  
+    garantindo que os resultados publicados **não exponham o código ou o desempenho individual** a terceiros.
+
+- **Proteção e Acesso:**  
+  - O acesso aos **dados brutos** e à **chave de pseudonimização** será restrito ao:
+    - Pesquisador Principal; e
+    - Orientador.  
+  - Todos os dados serão armazenados em **servidores seguros da IES (P2)**.
+
+- **Tempo de Retenção:**  
+  - Os dados brutos e as chaves de pseudonimização serão mantidos por um período máximo de **5 anos** após a publicação do trabalho (conforme diretrizes do CEP).  
+  - Após esse período, serão **permanentemente destruídos**.
+
+
+### 14.4 Aprovações necessárias (comitê de ética, jurídico, DPO, etc.)
+
+O experimento está condicionado à obtenção de **aprovações formais** de diversos órgãos:
+
+- **Comitê de Ética em Pesquisa (CEP) da PUC Minas:**  
+  - Aprovação **obrigatória** para qualquer pesquisa envolvendo seres humanos (**P1**).  
+  - O protocolo completo deve ser submetido ao CEP para garantir conformidade com as normas éticas.
+
+- **Coordenação do Curso / Departamento:**  
+  - Aprovação institucional para utilizar:
+    - as **turmas**; e
+    - os **repositórios acadêmicos**  
+    como ambiente para a pesquisa.
+
+- **Orientador(a):**  
+  - Aprovação **metodológica e científica** do Plano de Experimento,  
+    endossando o **rigor da pesquisa**.
+
+---
+
+## 15. Recursos, infraestrutura e orçamento
+
+### 15.1 Recursos humanos e papéis
+
+Os recursos humanos envolvidos no experimento têm papéis definidos para garantir a execução metodológica, a coleta de dados e a supervisão.
+
+**Responsável Principal (PI / Dono do Experimento)**  
+- **Papel:** Investigador principal, responsável pela gestão de todo o ciclo de vida do experimento.  
+- **Responsabilidades:**
+  - Desenho metodológico final.
+  - Randomização das equipes.
+  - Configuração inicial dos repositórios.
+  - Coleta de dados automatizada (scripts).
+  - Classificação manual de dados (ex.: severidade de bugs).
+  - Análise estatística dos resultados.
+  - Redação do TCC.
+
+**Orientador(a) do TCC**  
+- **Papel:** Supervisão metodológica e científica.  
+- **Responsabilidades:**
+  - Validação do Plano de Experimento.
+  - Apoio na resolução de dilemas éticos/metodológicos.
+  - Acompanhamento da análise estatística.
+  - Garantia da qualidade científica da pesquisa.
+
+**Professores das Disciplinas (Facilitadores)**  
+- **Papel:** Suporte logístico e institucional.  
+- **Responsabilidades:**
+  - Facilitar o acesso às turmas elegíveis.
+  - Apoiar a comunicação com os estudantes.
+  - Garantir que o experimento não interfira no cronograma de avaliação da disciplina.
+
+### 15.2 Infraestrutura técnica necessária
+
+A infraestrutura é predominantemente baseada em ferramentas **open source** e na plataforma de colaboração já utilizada (**R3: Restrição Orçamentária**).
+
+- **Plataforma de Colaboração e Controle de Versão: GitHub**  
+  - **Função:** Repositórios de código, gestão dos Pull Requests (PRs), configuração das **Branch Protection Rules** (fator de tratamento) e fonte principal para a extração de métricas de processo e interação (M11–M16).
+
+- **Ferramentas de Análise Estática de Código:**  
+  - *SonarQube Community Edition, ESLint/Pylint/Checkstyle (dependendo da linguagem)*  
+  - **Função:** Medição objetiva da **qualidade do código** (M01, M05) e identificação de **defeitos/vulnerabilidades** (M03, M04, M10).
+
+- **Ambiente de Coleta e Processamento:**  
+  - *Servidor/Máquina Virtual ou ambiente cloud gratuito (se aplicável)*  
+  - **Função:**  
+    - Hospedagem do SonarQube (se necessário).  
+    - Execução dos scripts de coleta de dados (web scraping ou API).  
+    - Armazenamento dos dados brutos e pseudonimizados.
+
+- **Linguagem/API: Python e GitHub API**  
+  - **Função:** Desenvolvimento dos scripts para a **coleta automatizada** de metadados dos PRs.
+
+
+### 15.3 Materiais e insumos
+
+Os materiais são majoritariamente **digitais**:
+
+- **Documentação Ética e Legal:**
+  - Termo de Consentimento Livre e Esclarecido (TCLE) – formulário digital para assinatura.
+  - Protocolo de Pesquisa – o próprio Plano de Experimento.
+
+- **Instrumentos de Medição:**
+  - Questionário Inicial (Google Forms ou plataforma similar).
+  - Questionário Pós-Experimento (Google Forms ou plataforma similar).
+
+- **Material de Treinamento:**
+  - Slides e material de apoio para o **workshop de Code Review** (Seção 10.6).
+
+
+### 15.4 Orçamento e custos estimados
+
+O orçamento é classificado como **baixo**, dado o contexto acadêmico e o uso de **software open source (R3)**.
+
+| Categoria de Custo          | Estimativa de Custo            | Fonte de Financiamento / Observação                                                                                 |
+|----------------------------|---------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Recursos Humanos           | Horas do Investigador Principal | Não remunerado (trabalho de TCC).                                                                                   |
+| Infraestrutura / Licenças  | R$ 0,00                         | Uso de ferramentas gratuitas (open source: GitHub, SonarQube Community, Python) e recursos de infraestrutura da IES. |
+| Comunicação / Disseminação | Baixo                           | Custos limitados à impressão da monografia e taxas de publicação/conferências (se aplicável após o experimento).     |
+| **Total Estimado**         | **Mínimo**                      | Financiado por recursos próprios do estudante / projeto de TCC.                                                     |
+
+O experimento será financiado inteiramente por **recursos próprios do Investigador Principal** e por **recursos de infraestrutura institucional** (acesso à internet, laboratórios de informática, se necessário).
+
+---
+
+## 16. Cronograma, marcos e riscos operacionais
+
+### 16.1 Macrocronograma (até o início da execução)
+
+O cronograma operacional está rigidamente limitado ao **ciclo acadêmico de 16 semanas (fevereiro a junho de 2026)**. As datas-chave antes e durante a execução são:
+
+| Fase        | Período Estimado        | Marcos                                                                                                                | Duração    |
+|------------|--------------------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
+| Planejamento | Nov/2025 – Dez/2025    | Plano de Experimento (v2.0) concluído e aprovado pelo Orientador.                                                    | 4 semanas |
+| Ética e Piloto | Dez/2025 – Jan/2026 | Submissão e aprovação do CEP (P1). Teste piloto (1–2 semanas) concluído.                                             | 6 semanas |
+| Preparação | Fev/2026 (início do semestre) | Recrutamento / TCLE coletado. Randomização das equipes (Seção 9.2). Configuração de repositórios (Branch Protection, P2). | 2 semanas |
+| Execução   | Fev/2026 – Jun/2026     | Início da coleta contínua de dados (a partir da 3ª semana da disciplina).                                            | 14 semanas |
+
+
+### 16.2 Dependências entre atividades
+
+As atividades do experimento seguem um **fluxo sequencial**, em que o início de uma depende da conclusão de outra.
+
+| Atividade Dependente                      | Dependência Obrigatória        | Justificativa                                                                                                      |
+|-------------------------------------------|--------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Recrutamento e Coleta do TCLE            | Aprovação do CEP (P1)          | Essencial por razões éticas. O TCLE deve ser aprovado antes de qualquer interação com o participante.              |
+| Randomização das Equipes (Seção 9.2)     | Coleta de Dados do Questionário Inicial | Os dados de experiência (variáveis de controle) são necessários para verificar o balanceamento da randomização.    |
+| Configuração do Branch Protection (Grupo B) | Randomização concluída       | A regra só pode ser aplicada após a equipe ser formalmente alocada ao grupo experimental.                         |
+| Treinamento e Workshop (Seção 10.6)      | Coleta do TCLE                 | Os participantes só podem receber instruções detalhadas do protocolo após formalizarem o consentimento.           |
+| Início da Coleta Contínua                | Configuração final dos repositórios (P2) | As ferramentas de análise estática e os scripts da API devem estar operacionais antes que o desenvolvimento comece.|
+
+
+### 16.3 Riscos operacionais e plano de contingência
+
+Os riscos operacionais estão ligados principalmente a **restrições logísticas (R1, R2)** e **técnicas (R3, R4)**.
+
+| Risco Operacional                        | Descrição do Risco                                                                                                                                          | Plano de Contingência (Ações)                                                                                                                                                                                                   |
+|-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Quebra de Protocolo (R4)               | Equipes do Grupo B encontram bypass para a Branch Protection e fazem merge sem revisão, ou o processo é feito “pro forma” (R1).                              | **Técnica:** Monitoramento semanal do status de merge via API. **Metodológica:** Aplicar análise **as-treated** (analisar PRs do Grupo B que realmente receberam revisão e PRs do Grupo A que não receberam).                    |
+| Baixo Volume de PRs (R2 / Logístico)   | O throughput das equipes é menor que o esperado (ex.: \< 60 PRs no total), comprometendo o poder estatístico.                                               | **Recurso:** Focar a análise em **tamanho do efeito** (Cohen's d) em vez de apenas no valor de *p*. **Metodológica:** Se a diferença for grande, buscar **replicação do estudo** em semestre futuro para aumentar o *N*.        |
+| Atraso no Cronograma (R1 / Temporal)   | A disciplina atrasa a entrega do projeto ou a fase de desenvolvimento é encurtada.                                                                           | **Ação:** Reajustar o período de coleta de dados, priorizando as métricas mais críticas (M07, M11). **Escopo:** Se necessário, negociar com a coordenação um **grace period** para rastreamento de bugs pós-entrega (M07, M08). |
+| Falha na Coleta Automatizada (R3 / Técnico) | O GitHub API ou o SonarQube apresenta instabilidade ou falha nos scripts de extração.                                                                      | **Backup:** Planejar **coleta manual parcial** para as métricas críticas (M11 – Tempo de Merge) e usar análise estática em **localhost** como alternativa se o servidor principal falhar.                                       |
+
+
+---
+
+
+## 17. Governança do experimento
+
+### 17.1 Papéis e responsabilidades formais
+
+O fluxo de responsabilidade é claro, assegurando que decisões críticas e execução sejam controladas.
+
+| Papel Formal                         | Responsabilidade Principal                                                                                                      | Fluxo de Responsabilidade                                                                                                  |
+|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Dono / Investigador Principal (PI)  | Estudante                                                                                                                       | **DECIDE** sobre a execução operacional; **EXECUTA** todas as atividades de coleta e análise; **INFORMA** o Orientador.   |
+| Aprovador Metodológico / Científico | Orientador(a) do TCC                                                                                                            | **DECIDE / REVISA** alterações no desenho e na análise estatística; **REVISA** e aprova os *milestones*.                  |
+| Unidade Executora                   | Participantes (alunos)                                                                                                          | **EXECUTAM** o processo de desenvolvimento e Code Review conforme o grupo alocado; **INFORMAM** o pesquisador via logs e questionários. |
+| Aprovador Ético                     | Comitê de Ética em Pesquisa (CEP)                                                                                               | **APROVA** o protocolo ético (requerido antes da execução).                                                               |
+
+
+### 17.2 Ritos de acompanhamento pré-execução
+
+Os checkpoints visam garantir que o experimento esteja pronto para começar com rigor metodológico e ético.
+
+**Reuniões de Revisão do Plano (com Orientador)**  
+- **Frequência:** Semanal, durante a fase de planejamento (Novembro / Dezembro de 2025).  
+- **Participantes:** PI e Orientador.  
+- **Foco:** Refinar as Seções 10 a 13 (Amostragem, Instrumentação, Validade) e preparar a submissão ao CEP.
+
+**Checkpoint Ético e Institucional**  
+- **Frequência:** Única, após a conclusão do Plano (Dezembro/2025 – Janeiro/2026).  
+- **Participantes:** PI, Orientador e CEP.  
+- **Foco:** Obter a **Aprovação Formal do CEP (P1)**.
+
+**Revisão Final da Prontidão Operacional (Piloto)**  
+- **Frequência:** Única, após o piloto e antes do início da Semana 3 da disciplina.  
+- **Participantes:** PI e Orientador.  
+- **Foco:** Garantir o *checklist* da Seção 20 (Branch Protection aplicada, scripts de coleta funcionando) e **aprovar o início da execução**.
+
+
+### 17.3 Processo de controle de mudanças no plano
+
+Qualquer alteração no desenho experimental que possa afetar a **Validade Interna/Externa** ou as **condições dos participantes** (Seção 13) deve seguir um processo formal:
+
+1. **Proposição**  
+   - O PI propõe a mudança necessária  
+     - Ex.: ajustar a métrica M04, modificar o tempo de merge analisado devido a outliers, etc.
+
+2. **Análise e Impacto**  
+   - O PI e o Orientador analisam:
+     - o impacto da mudança nas hipóteses (H1);  
+     - as implicações na Validade (Seção 13).
+
+3. **Aprovação**
+   - **Mudanças metodológicas (desenho / análise):**  
+     - Requerem **aprovação formal do Orientador**.  
+   - **Mudanças éticas (risco / TCLE):**  
+     - Requerem **reavaliação e aprovação do CEP**.
+
+4. **Registro**
+   - Toda mudança aprovada deve ser registrada no **Histórico de Revisão (Seção 1.3)** do Plano de Experimento, garantindo:
+     - **rastreabilidade**,  
+     - **transparência** das modificações ao longo do tempo.
+
+
+---
+
+## 18. Plano de documentação e reprodutibilidade
+
+### 18.1 Repositórios e convenções de nomeação
+
+O armazenamento e a organização dos artefatos serão realizados em **repositórios controlados**, garantindo segurança e rastreabilidade.
+
+- **Repositório Principal (GitHub privado)**  
+  - **Função:** Hub de controle do experimento, acessível apenas pelo Pesquisador e pelo Orientador.  
+  - **Conteúdo:**  
+    - Plano de Experimento  
+    - Scripts de Coleta  
+    - Scripts de Análise (R/Python)  
+    - Arquivos de configuração (linters, Branch Protection)  
+    - Data set final pseudonimizado
+
+- **Repositório de Dados Sensíveis (armazenamento criptografado da IES)**  
+  - **Função:** Local seguro, separado do código, para armazenar:  
+    - Chave de pseudonimização  
+    - TCLE (Termos de Consentimento) assinados  
+  - **Conformidade:** Em alinhamento com as exigências do CEP.
+
+
+### 18.2 Templates e artefatos padrão
+
+Todos os modelos e instrumentos serão armazenados em uma pasta dedicada (`/Instrumentos`) no Repositório Principal.
+
+| Template / Artefato      | Descrição                                                         | Uso Principal                                                        |
+|--------------------------|-------------------------------------------------------------------|----------------------------------------------------------------------|
+| Questionário Inicial     | Coleta dados de experiência e variáveis de controle (Seção 8.6). | Formulário digital (Google Forms).                                  |
+| Questionário Pós-Experimento | Coleta dados de percepção subjetiva (M17 a M20).           | Formulário digital (Google Forms).                                  |
+| Template de PR           | Modelo padronizado para submissão de Pull Requests pelas equipes.| Garante que cada PR vincule a issue correta para rastreamento (M07).|
+| Guia de Regras de Codificação | Padrões de estilo e qualidade exigidos (P3).              | Material de suporte para o treinamento (Seção 10.6) e revisões do Grupo B. |
+| Template TCLE            | Documento ético de consentimento informado.                       | Registro do consentimento (P1).                                     |
+
+
+### 18.3 Plano de empacotamento para replicação futura
+
+A **reprodutibilidade** é essencial para a ciência. Ao final do TCC, será criado um **Pacote de Replicação**, contendo os elementos necessários para que outro pesquisador possa replicar ou estender o experimento.
+
+O Pacote de Replicação incluirá:
+
+- **Documentação metodológica:**  
+  - Plano de Experimento final.  
+  - Documentação completa dos critérios de inclusão e exclusão (Seção 10).
+
+- **Scripts de Coleta:**  
+  - Código-fonte dos scripts Python/API, com documentação detalhada:  
+    - bibliotecas utilizadas;  
+    - instruções para configuração de acesso (sem incluir chaves de API).
+
+- **Scripts de Análise:**  
+  - Scripts estatísticos (R ou Python) utilizados para responder às hipóteses (H1),  
+    permitindo auditoria e repetição do processo de análise.
+
+- **Data set final:**  
+  - Arquivo de dados pseudonimizado (CSV ou JSON) utilizado na análise estatística, contendo:  
+    - métricas M01–M21;  
+    - variáveis de controle (Experiência, Tamanho da Equipe).
+
+- **Instruções de setup:**  
+  - Arquivo `README` detalhando como configurar as ferramentas open source:  
+    - setup do SonarQube;  
+    - linters;  
+    - demais dependências,  
+    de modo que o ambiente de medição possa ser recriado.
+
+---
+
+## 19. Plano de comunicação
+
+### 19.1 Públicos e mensagens-chave pré-execução
+
+| Público                  | Objetivo da Comunicação                                             | Mensagens-Chave Essenciais                                                                                                                                                                               |
+|--------------------------|---------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Participantes (Alunos)   | Engajamento, garantia de voluntariedade (P1), esclarecimento do papel. | “Sua participação é voluntária e não afetará sua nota. O Code Review obrigatório é uma variável de pesquisa para estudar a qualidade do código. Seu papel é atuar como desenvolvedor júnior.”             |
+| Orientador(a) do TCC     | Alinhamento metodológico, aprovação e suporte.                     | “O Plano de Experimento (v2.0) está finalizado. Iremos proceder com a submissão ao CEP e a configuração dos repositórios conforme o cronograma (Seção 16).”                                               |
+| Professores das Disciplinas | Coordenação logística, suporte ao protocolo (R4).              | “O experimento utilizará a regra de Branch Protection em X repositórios. Solicitamos apoio para reforçar o uso do fluxo de Pull Request e para evitar que o Code Review seja um fator de estresse para os alunos.” |
+| Comitê de Ética (CEP)    | Aprovação institucional.                                            | “O protocolo garante a anonimização/pseudonimização dos dados e a voluntariedade da participação. Buscamos a aprovação para iniciar a coleta conforme P1.”                                                |
+| Coordenação do Curso     | Conscientização estratégica, potencial impacto curricular.         | “Os resultados do estudo fornecerão evidências sobre a eficácia de práticas de Code Review no currículo e na formação profissional dos alunos.”                                                           |
+
+
+### 19.2 Canais e frequência de comunicação
+
+| Público                  | Canal de Comunicação                                               | Frequência                                                                                                  |
+|--------------------------|---------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| Participantes (Alunos)   | Apresentação em aula; e-mail; avisos na plataforma da disciplina (Teams). | No início (para TCLE e treinamento) e em pontos obrigatórios (Seção 19.3).                                 |
+| Orientador(a) do TCC     | Reuniões formais (online ou presenciais); e-mail.                  | Semanal (fase de planejamento e análise); mensal (fase de execução).                                       |
+| Professores / Coordenação| E-mail formal; reunião de alinhamento pré-execução.                | No início e no final da execução, e em pontos obrigatórios (Seção 19.3).                                   |
+
+
+### 19.3 Pontos de comunicação obrigatórios
+
+A comunicação formal é mandatória nos seguintes eventos, garantindo **rastreabilidade** e **transparência** (Governança):
+
+1. **Aprovação do Plano:**  
+   - Comunicação ao Orientador, Professores e Coordenação (marcando o marco da Seção 16.1).
+
+2. **Aprovação Ética (P1):**  
+   - Comunicação formal a todos os stakeholders antes do recrutamento (libera a execução).
+
+3. **Início da Coleta de Dados:**  
+   - Notificação aos Professores e Participantes (marco de início definido na Seção 16.1).
+
+4. **Mudanças Relevantes no Protocolo:**  
+   - Qualquer alteração que afete:
+     - o risco,  
+     - o escopo (ex.: mudança de métricas), ou  
+     - o cronograma,  
+   deve ser comunicada imediatamente após a aprovação do Orientador (conforme Seção 17.3).
+
+5. **Decisão de Parada Antecipada (Seção 6.3):**  
+   - Comunicação imediata e formal a todos os stakeholders envolvidos.
+
+6. **Resultados Finais:**  
+   - Apresentação formal ao Orientador, Professores e Coordenação do Curso, após a análise de dados.
+
+---
+
+## 20. Critérios de prontidão para execução (Definition of Ready)
+
+### 20.1 Checklist de prontidão (itens que devem estar completos)
+
+Para que o Investigador Principal (PI) receba autorização para iniciar a execução do experimento, **todos os itens abaixo devem ser verificados e concluídos**, garantindo que as premissas (P1, P2, P3) e as restrições (R1–R4) foram mitigadas.
+
+**I. Governança e Ética**
+
+- **Aprovação do Plano de Experimento:**  
+  - O Plano (versão 2.0) está finalizado e formalmente aprovado pelo Orientador.
+- **Aprovação do CEP (P1):**  
+  - O protocolo de pesquisa foi submetido e recebeu a **Aprovação Formal** do Comitê de Ética em Pesquisa (CEP).
+- **Instrumentos finalizados:**  
+  - O TCLE e os questionários (Inicial e Pós-Experimento) estão prontos para uso e validados.
+- **Treinamento concluído:**  
+  - O material do workshop de Code Review está pronto para ser ministrado aos participantes (Seção 10.6).
+
+**II. Logística e Amostragem**
+
+- **Identificação das Turmas:**  
+  - Turmas e disciplinas elegíveis foram confirmadas com os Professores / Coordenação.
+- **Recrutamento imediato:**  
+  - O convite aos participantes foi realizado e o processo de coleta do TCLE está ativo.
+- **Cronograma alinhado (R1):**  
+  - O cronograma do experimento está totalmente alinhado com o calendário do semestre letivo (fevereiro–junho de 2026).
+
+**III. Infraestrutura e Tecnologia (P2, R3)**
+
+- **Scripts validados:**  
+  - Scripts de coleta (GitHub API) e de análise (conexão com SonarQube / linters) foram testados com sucesso durante o piloto.
+- **Regras configuradas:**  
+  - A Branch Protection Rule foi configurada nos repositórios de teste e está pronta para ser aplicada no Grupo B (experimental).
+- **Ambiente de armazenamento:**  
+  - Ambiente seguro para armazenamento dos dados pseudonimizados e dos documentos éticos está configurado e acessível (P2).
+
+
+### 20.2 Aprovações finais para iniciar a operação
+
+O início da execução do experimento (marcando o começo da **Semana 3 da disciplina**) deve ser autorizado formalmente pelo responsável metodológico.
+
+- **Aprovação metodológica:**  
+  - O(a) Orientador(a) do TCC é o principal responsável por conceder o **“OK final”** para iniciar a execução.
+
+- **Registro do aceite:**  
+  - O aceite será registrado por meio de um **e-mail formal** do Orientador para o PI (Marcella Costa), confirmando que todos os itens do Checklist 20.1 foram concluídos.  
+  - Este e-mail será anexado ao **Histórico de Revisão do Plano**.
