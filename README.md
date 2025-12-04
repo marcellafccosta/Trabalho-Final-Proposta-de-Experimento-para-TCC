@@ -37,9 +37,9 @@ Este experimento está conectado a projetos acadêmicos desenvolvidos ao longo d
 ## 2. Contexto e problema
 
 ### 2.1 Descrição do problema / oportunidade
-Em projetos acadêmicos, é comum que Pull Requests sejam integrados rapidamente sem revisão formal, especialmente por pressão de prazos e falta de maturidade no processo. Isso pode resultar na inclusão de defeitos, inconsistências de padrão, decisões arquiteturais inadequadas e maior retrabalho após o merge. Ao mesmo tempo, exigir Code Review obrigatório pode aumentar o tempo de integração e gerar custo adicional de organização.
+Em projetos acadêmicos, é comum que Pull Requests sejam integrados rapidamente sem revisão formal, especialmente por pressão de prazos e falta de maturidade no processo. Isso pode resultar na inclusão de **defeitos**, inconsistências de padrão, decisões arquiteturais inadequadas e maior retrabalho após o merge. Ao mesmo tempo, exigir Code Review obrigatório pode **aumentar o tempo de integração** e gerar custo adicional de organização.
 
-**Oportunidade:** avaliar empiricamente se a obrigatoriedade de Code Review melhora a qualidade dos PRs em projetos acadêmicos e se o benefício supera o custo em tempo e esforço. A hipótese é que a obrigatoriedade eleva a Qualidade do Código (menos defeitos e maior adesão a padrões) e, potencialmente, a Eficiência do Processo (melhor comunicação e aprendizado).
+**Oportunidade:** avaliar empiricamente se a obrigatoriedade de Code Review **melhora a qualidade dos PRs em projetos acadêmicos** e se o benefício supera o custo em tempo e esforço. A hipótese é que a obrigatoriedade eleva a Qualidade do Código (menos defeitos e maior adesão a padrões) e, potencialmente, a Eficiência do Processo (melhor comunicação e aprendizado). Em outras palavras, o problema central que o experimento tenta responder é: **“vale a pena mesmo obrigar Code Review em contexto acadêmico, ou isso vira só burocracia?”**.
 
 ### 2.2 Contexto organizacional e técnico
 O experimento será conduzido em ambiente acadêmico universitário, especificamente com equipes compostas por estudantes de Engenharia de Software que trabalham colaborativamente em repositórios hospedados na plataforma GitHub. 
@@ -53,12 +53,12 @@ O experimento será conduzido em ambiente acadêmico universitário, especificam
 - Processo de desenvolvimento: integração via PRs, com divisão de tarefas, commits frequentes e entregas incrementais.  
 - Ferramentas relevantes: Pull Requests, Reviews, Branch Protection Rules, Issues e Actions do GitHub.
 
-### 2.3 Trabalhos e evidências prévias (internos e externos)
-Evidências internas coletadas através de observação sistemática no curso de Engenharia de Software revelam que, em várias disciplinas e projetos desenvolvidos, os Pull Requests são frequentemente aceitos e integrados sem passar por um processo sistemático de revisão. Como resultado desta prática, bugs e defeitos são detectados apenas nas fases finais de testes ou mesmo após a entrega do projeto, gerando retrabalho significativo e comprometendo a qualidade final do software produzido.
+### 2.3 Trabalhos e evidências prévias
+Evidências internas coletadas através de observação sistemática no curso de Engenharia de Software revelam que, em várias disciplinas e projetos desenvolvidos, os Pull Requests são frequentemente aceitos e integrados **sem passar por um processo sistemático de revisão**. Como resultado desta prática, **bugs e defeitos são detectados apenas nas fases finais** de testes ou mesmo após a entrega do projeto, gerando **retrabalho significativo** e comprometendo a qualidade final do software produzido.
 
 No âmbito externo, tanto a literatura científica quanto a prática na indústria de software estabelecem o Code Review como uma prática consolidada na engenharia de software moderna. Esta prática tem demonstrado efetividade na redução de defeitos, padronização de código, compartilhamento de conhecimento entre membros da equipe e prevenção de regressões no sistema. Resultados empíricos de diversos estudos apontam para um impacto positivo significativo na qualidade do software, embora estes benefícios sejam dependentes de fatores contextuais, como a experiência do time, o volume de mudanças em cada revisão e a cultura organizacional estabelecida.
 
-Entre os trabalhos científicos relevantes, destaca-se o estudo de McIntosh et al. de 2016, intitulado "The impact of code review coverage and code review participation on software quality", que analisou projetos de código aberto como Qt, VTK e ITK, demonstrando correlação entre Code Review e redução de 14% a 28% nos bugs pós-release. Bacchelli e Bird, em 2013, publicaram "Expectations, outcomes, and challenges of modern code review", identificando que os principais benefícios reportados são encontrar defeitos, representando 14% dos casos, e transferência de conhecimento, correspondendo a 41% dos benefícios percebidos. No contexto pedagógico específico, Hundhausen et al., em 2013, através do trabalho "Talking about code: Integrating pedagogical code reviews into early computing courses", demonstraram que Code Review pedagógico melhora significativamente a compreensão de código por parte dos estudantes em cursos iniciais de computação.
+Entre os trabalhos científicos relevantes, destaca-se o estudo de McIntosh et al. de 2016, intitulado "The impact of code review coverage and code review participation on software quality", que analisou projetos de código aberto, demonstrando correlação entre **Code Review e redução de 14% a 28% nos bugs pós-release**. Bacchelli e Bird, em 2013, publicaram "Expectations, outcomes, and challenges of modern code review", identificando que os principais benefícios reportados são encontrar defeitos, representando 14% dos casos, e transferência de conhecimento, correspondendo a 41% dos benefícios percebidos. No contexto pedagógico específico, Hundhausen et al., em 2013, através do trabalho "Talking about code: Integrating pedagogical code reviews into early computing courses", demonstraram que **Code Review pedagógico melhora significativamente a compreensão de código por parte dos estudantes em cursos iniciais de computação**.
 
 ### 2.4 Referencial teórico e empírico essencial
 O referencial teórico que fundamenta este experimento baseia-se em três conceitos centrais da Engenharia de Software moderna:
@@ -67,14 +67,16 @@ O referencial teórico que fundamenta este experimento baseia-se em três concei
 
 2. **Pull Request (PR):** proposta formal de mudança em repositórios Git, seguindo o fluxo de criação de um branch com as alterações desejadas, submissão para revisão por outros membros da equipe, processo de aprovação baseado em critérios estabelecidos e, finalmente, integração ao branch principal através do merge. Os Pull Requests facilitam a discussão assíncrona sobre as mudanças propostas, permitem revisão sistemática do código e são centrais no workflow de equipes de desenvolvimento modernas.
 
-3. **Qualidade de Software:** neste estudo é fundamentado no modelo internacional ISO/IEC 25010. Este modelo estabelece dimensões de qualidade que incluem funcionalidade, abrangendo corretude e completude das funcionalidades implementadas; confiabilidade, relacionada à maturidade do sistema, disponibilidade e tolerância a falhas; segurança, contemplando confidencialidade e integridade dos dados; manutenibilidade, que engloba modularidade, reusabilidade e analisabilidade do código; e eficiência de desempenho do sistema. Para os propósitos deste experimento específico, o foco concentra-se em três dimensões principais: manutenibilidade, avaliada através de métricas de complexidade e duplicação de código; confiabilidade, medida através da quantidade de bugs detectados; e segurança, analisada através da identificação de vulnerabilidades no código produzido.
+3. **Qualidade de Software:** neste estudo é fundamentado no modelo internacional ISO/IEC 25010. Este modelo estabelece dimensões de qualidade que incluem funcionalidade, abrangendo corretude e completude das funcionalidades implementadas; confiabilidade, relacionada à maturidade do sistema, disponibilidade e tolerância a falhas; segurança, contemplando confidencialidade e integridade dos dados; manutenibilidade, que engloba modularidade, reusabilidade e analisabilidade do código; e eficiência de desempenho do sistema. Para os propósitos deste experimento específico, o foco concentra-se em três dimensões principais: **manutenibilidade**, avaliada através de métricas de complexidade e duplicação de código; **confiabilidade**, medida através da quantidade de bugs detectados; e **segurança**, analisada através da identificação de vulnerabilidades no código produzido.
+
+Na prática, o experimento está sempre cruzando essas três ideias: como o PR é usado, que tipo de Code Review é feito e como isso reflete em indicadores concretos de qualidade.
 
 ---
 
 ## 3. Objetivos e questões (Goal / Question / Metric)
 
 ### 3.1 Objetivo geral (Goal template)
-Analisar Pull Requests (PRs) de projetos acadêmicos de Engenharia de Software com o propósito de comparar a qualidade e o custo de integração do ponto de vista de desenvolvedores e revisores (alunos) no contexto de equipes acadêmicas que utilizam GitHub para desenvolvimento colaborativo, contrastando PRs com Code Review obrigatórios vs. PRs sem obrigatoriedade de review.
+Analisar Pull Requests (PRs) de projetos acadêmicos de Engenharia de Software com o propósito de **comparar a qualidade e o custo de integração do ponto de vista de desenvolvedores e revisores** (alunos) no contexto de equipes acadêmicas que utilizam GitHub para desenvolvimento colaborativo, contrastando PRs com Code Review obrigatórios vs. PRs sem obrigatoriedade de review. Ou seja, o foco é entender o trade-off entre “melhor qualidade” e “mais custo/atraso” quando se torna a revisão uma exigência formal.
 
 ### 3.2 Objetivos específicos
 - **O1:** Quantificar a diferença na qualidade do código introduzido através de PRs entre os grupos com e sem a política obrigatória de Code Review.  
@@ -160,6 +162,8 @@ Analisar Pull Requests (PRs) em projetos acadêmicos de Engenharia de Software, 
 - **Do ponto de vista de** estudantes (desenvolvedores e revisores) e educadores  
 - **No contexto de** equipes acadêmicas que utilizam GitHub para desenvolvimento colaborativo, contrastando projetos com Code Review obrigatório versus projetos sem obrigatoriedade de revisão.
 
+Em resumo, o escopo olha só para o que acontece dentro do fluxo de PRs e revisão, e não para todo o ciclo de vida do projeto.
+
 #### INCLUÍDO no experimento
 
 | Categoria              | Detalhamento                                                                                                                                               |
@@ -178,19 +182,14 @@ Analisar Pull Requests (PRs) em projetos acadêmicos de Engenharia de Software, 
 | Medições Não Realizadas| Performance em runtime da aplicação; experiência de usuários finais; impacto financeiro; segurança em ambiente de produção real; escalabilidade do sistema. |
 
 ### 4.2 Contexto do estudo (tipo de organização, projeto, experiência)
-- **Tipo de Organização:** Instituição de Ensino Superior (IES) em nível de Graduação.  
+- **Tipo de Organização:** Instituição de Ensino Superior em nível de Graduação.  
 - **Tipo de Projeto:** projeto de software de médio porte e complexidade (por exemplo, sistema web ou aplicativo móvel), com foco em desenvolvimento de funcionalidades e trabalho em equipe, com duração típica de um semestre acadêmico.  
 - **Criticidade:** Baixa – o projeto é didático; falhas afetam nota, não causam danos financeiros ou operacionais a clientes externos.  
 - **Perfil de Experiência dos Participantes:** desenvolvedores juniores (estudantes com 1–2 anos de programação, familiaridade básica com Git e PRs no GitHub, pouca experiência formal em Code Review ou TDD).
 
 ### 4.3 Premissas
-- A alocação aleatória das equipes para os Grupos A e B resultará em grupos de experiência e habilidade comparáveis.  
-- A plataforma GitHub e suas APIs estarão estáveis e acessíveis durante todo o experimento.  
-- As regras de desenvolvimento (convenções de codificação e padrões) serão formalmente documentadas e conhecidas por ambos os grupos antes do início.  
-- O treinamento inicial de 1–2 horas sobre Code Review é suficiente para garantir compreensão adequada da tarefa pelos revisores do Grupo B.
-
 **P1 – Aprovação ética e consentimento voluntário:**  
-O Comitê de Ética em Pesquisa (CEP) da PUC Minas aprovará o protocolo de pesquisa e todos os participantes concordarão voluntariamente em participar após serem informados detalhadamente. O TCLE será assinado antes da coleta de dados, garantindo direito de retirada sem penalidades.
+O Comitê de Ética em Pesquisa (CEP) da PUC Minas aprovará o protocolo de pesquisa e todos os participantes concordarão voluntariamente em participar após serem informados detalhadamente. O Termo de Consentimento Livre e Esclarecido (TCLE) será assinado antes da coleta de dados, garantindo direito de retirada sem penalidades.
 
 **P2 – Infraestrutura técnica disponível e funcional:**  
 Todos terão acesso contínuo à internet, computadores adequados e contas ativas no GitHub; ferramentas de análise estática (SonarQube Community, ESLint/Pylint) estarão configuradas e scripts de coleta via GitHub API funcionarão sem interrupções críticas.
@@ -208,9 +207,12 @@ Grupos controle e experimental terão distribuição similar de habilidades téc
 - **R4 – Restrição de acesso a dados:** coleta restrita ao que é público via GitHub API e ferramentas integradas; não inclui comunicações privadas (WhatsApp, Discord etc.) ou atividades fora do GitHub.
 
 ### 4.5 Limitações previstas
-- **L1 – Efeito Hawthorne:** Participantes sabem que estão sendo observados e que seus dados estão sendo coletados para pesquisa. Este conhecimento pode alterar comportamento, levando a: (a) maior cuidado ao escrever código (independente do Code Review), (b) revisões mais superficiais para "parecer que está fazendo", (c) respostas em questionários influenciadas pelo desejo de "ajudar a pesquisa" ou agradar o pesquisador.
-- **L2 – Maturação dos participantes:** Ao longo do semestre, estudantes naturalmente melhoram suas habilidades de programação por exposição contínua, prática deliberada, feedback dos professores e aprendizado com erros. Esta maturação pode ser confundida com o efeito do Code Review, especialmente se o grupo experimental tiver aprendizado acelerado por outros fatores (ex: professores mais envolvidos, projetos mais desafiadores). 
+- **L1 – Efeito Hawthorne:** Participantes sabem que **estão sendo observados** e que seus dados estão sendo coletados para pesquisa. Este conhecimento pode **alterar comportamento**, levando a: (a) maior cuidado ao escrever código (independente do Code Review), (b) revisões mais superficiais para "parecer que está fazendo", (c) respostas em questionários influenciadas pelo desejo de "ajudar a pesquisa" ou agradar o pesquisador.
+
+- **L2 – Maturação dos participantes:** Ao longo do semestre, estudantes naturalmente **melhoram suas habilidades de programação** por exposição contínua, prática deliberada, feedback dos professores e aprendizado com erros. Esta maturação pode ser **confundida com o efeito do Code Review**, especialmente se o grupo experimental tiver aprendizado acelerado por outros fatores (ex: professores mais envolvidos, projetos mais desafiadores).
+
 - **L3 – Heterogeneidade das equipes e projetos:** Diferenças substanciais entre equipes incluem: (a) experiência prévia variando de zero a 2 anos profissionais, (b) projetos com domínios e complexidades diferentes (gestão de biblioteca vs. sistema financeiro), (c) tecnologias diversas (JavaScript vs. Python vs. Java), (d) dinâmicas interpessoais únicas (equipes coesas vs. conflituosas), (e) distribuição desigual de habilidades dentro da equipe (uma pessoa muito experiente vs. equipe homogênea).
+
 - **L4 – Tamanho e complexidade variável dos PRs:** Nem todos os PRs são iguais: alguns adicionam uma linha de configuração, outros implementam funcionalidades complexas de 800 linhas. Esta variabilidade: (a) dificulta comparações diretas (PR pequeno naturalmente tem menos bugs), (b) pode enviesar médias se distribuição for diferente entre grupos, (c) requer normalização e análises de sensibilidade.
 
 ---
@@ -255,8 +257,8 @@ Grupos controle e experimental terão distribuição similar de habilidades téc
 
 ## 6. Riscos de alto nível, premissas e critérios de sucesso
 
-### 6.1 Riscos de alto nível (negócio, técnicos, etc.)
-- **R1 (Técnico):** baixa adesão ao processo de revisão (review feito “pro forma”).  
+### 6.1 Riscos de alto nível
+- **R1 (Técnico):** baixa adesão ao processo de revisão.  
 - **R2 (Logístico):** volume de PRs inferior ao necessário para análise.  
 - **R3 (Técnico):** falhas no ambiente GitHub ou indisponibilidade de métricas.  
 - **R4 (Processo):** participantes ignoram o protocolo (merge direto sem review obrigatório).  
@@ -277,7 +279,7 @@ O experimento será considerado **viável e útil** se:
   - Preenchimento dos formulários.
   - Vinculação adequada de issues.
 
-- Pelo menos **uma métrica de qualidade** (por exemplo, bugs ou score de qualidade percebida) indicar **melhora com review obrigatório**, **sem custo proibitivo de tempo** (aumento de tempo ≤ **25%**).
+- Pelo menos **uma métrica de qualidade** indicar **melhora com review obrigatório**, **sem custo proibitivo de tempo**.
 
 ### 6.3 Critérios de parada antecipada (pré-execução)
 O experimento deve ser suspenso ou adiado se:
@@ -297,14 +299,14 @@ O modelo conceitual deste experimento parte da ideia de que a política de Code 
 
 São definidos dois cenários principais:
 
-- **Grupo A – Sem Code Review obrigatório:** PRs podem ser integrados diretamente à branch principal sem exigência formal de aprovação prévia. A revisão, quando ocorre, depende da iniciativa espontânea dos membros da equipe.  
-- **Grupo B – Com Code Review obrigatório:** PRs só podem ser integrados após pelo menos uma aprovação formal de revisão. A branch principal é protegida por regras de *branch protection* no GitHub, forçando a passagem do PR por pelo menos um revisor.
+- **Grupo A – Sem Code Review obrigatório:** PRs podem ser integrados diretamente à branch principal sem exigência formal de aprovação prévia. A revisão, quando ocorre, depende da **iniciativa espontânea** dos membros da equipe.  
+- **Grupo B – Com Code Review obrigatório:** PRs só podem ser integrados após **pelo menos uma aprovação formal de revisão**. A branch principal é protegida por regras de *branch protection* no GitHub, forçando a passagem do PR por pelo menos um revisor.
 
 O raciocínio conceitual é:
 
-- A obrigatoriedade de Code Review tende a aumentar a quantidade e a profundidade dos comentários de revisão, gerar mais ciclos de retrabalho pré-merge e forçar autores a preparar PRs mais organizados, legíveis e aderentes a padrões.  
+- A obrigatoriedade de Code Review tende a **aumentar a quantidade** e a profundidade dos comentários de revisão, gerar mais ciclos de retrabalho pré-merge e forçar autores a preparar PRs mais organizados, legíveis e aderentes a padrões.  
 - Esse aumento de inspeção e retrabalho pré-merge é esperado reduzir problemas estruturais (complexidade excessiva, duplicação, *smells*), diminuir a quantidade e a densidade de defeitos pós-merge (especialmente bugs severos) e melhorar indicadores de manutenibilidade e conformidade a padrões.  
-- Como efeito colateral, Code Review obrigatório pode aumentar o tempo entre abertura e merge, elevar a carga de trabalho dos revisores e ser percebido como burocrático, ao mesmo tempo em que é visto como mecanismo de aprendizado e melhoria.
+- Como efeito colateral, Code Review obrigatório pode **aumentar o tempo entre abertura e merge**, elevar a carga de trabalho dos revisores e ser percebido como burocrático, ao mesmo tempo em que é visto como mecanismo de aprendizado e melhoria.
 
 Assim, o experimento busca verificar empiricamente se o aumento de esforço e tempo decorrente da obrigatoriedade do Code Review (fator) se traduz, de fato, em melhoria mensurável de qualidade e redução de defeitos (respostas), e como esse trade-off é percebido pelos estudantes envolvidos.
 
@@ -328,21 +330,26 @@ Assim, o experimento busca verificar empiricamente se o aumento de esforço e te
 | Q4.2 – Custo-benefício          | A percepção de custo-benefício é igual entre os grupos.               | O grupo B percebe mais sobrecarga/burocracia, mas maior benefício em qualidade.         |
 | Q4.3 – Qualidade dos comentários| A qualidade dos comentários é igual nos grupos.                        | Comentários do grupo B são percebidos como mais úteis, construtivos e respeitosos.      |
 
+Em síntese, as hipóteses alternativas convergem para a ideia de que o Code Review obrigatório deve trazer melhor qualidade e menos defeitos no Grupo B, à custa de maior tempo até o merge e maior carga de trabalho de revisão.
+
 ### 7.3 Nível de significância e considerações de poder
-O nível de significância (α) será de **0,05** para todos os testes. Hipóteses nulas serão rejeitadas quando **p < 0,05**. Os testes serão predominantemente bicaudais para acomodar achados exploratórios e inesperados.
 
-O poder estatístico (1 − β) é limitado pelo tamanho amostral planejado: aproximadamente 4–6 equipes, 20–30 participantes e 60–80 PRs no total (30–40 PRs por grupo). Esse tamanho é suficiente para detectar efeitos moderados a grandes (Cohen’s d ≥ 0,5), mas com baixo poder para efeitos pequenos. A dependência dos dados por equipe reduz o “n efetivo”.
+O nível de significância (α) adotado será de **0,05** para todos os testes. Assim, as hipóteses nulas serão rejeitadas quando o valor de **p < 0,05**, aceitando-se até 5% de risco de concluir que existe um efeito quando, na realidade, ele não existe (Erro Tipo I). Os testes serão predominantemente **bicaudais**, de modo a acomodar achados exploratórios em que o efeito possa surgir em qualquer direção.
 
-Dado o número de testes de hipóteses (12 no total), será considerado o risco de erro Tipo I inflacionado por múltiplas comparações, e os valores de p serão interpretados com cautela, priorizando consistência entre métricas relacionadas. Para mitigar risco de erro Tipo II (falso negativo), serão reportados tamanhos de efeito (Cohen’s d, Cliff’s Delta) e relevância prática das descobertas, além dos p-values.
+O **poder estatístico (1 − β)** é limitado pelo tamanho amostral previsto: aproximadamente 4–6 equipes, 20–30 participantes e 60–80 PRs no total (30–40 por grupo). Esse cenário é adequado para detectar **efeitos moderados a grandes** (por exemplo, **Cohen’s d ≥ 0,5**), mas tem baixa capacidade para identificar **efeitos pequenos**. Além disso, a dependência entre observações dentro da mesma equipe reduz o “n efetivo”, o que reforça a necessidade de interpretar os resultados com cautela.
+
+Como o plano inclui **cerca de 12 testes de hipóteses**, há risco de **inflação do Erro Tipo I** devido a múltiplas comparações. Por esse motivo, os valores de *p* não serão interpretados de forma isolada: será dada ênfase à **consistência entre métricas relacionadas** (por exemplo, diferentes medidas de qualidade ou de defeitos) e ao padrão geral dos resultados, e não apenas a significâncias pontuais.
+
+Para mitigar o risco de **Erro Tipo II** (não detectar efeitos que realmente existem), os resultados serão sempre acompanhados de **tamanhos de efeito** (por exemplo, **Cohen’s d**) e de uma discussão sobre a **relevância prática** das diferenças observadas, além dos p-values. Em termos práticos, a interpretação final privilegiará a combinação entre **significância estatística**, **magnitude do efeito** e **importância prática** no contexto de projetos acadêmicos com Code Review obrigatório.
 
 ---
 
 ## 8. Variáveis, fatores, tratamentos e objetos de estudo
 
 ### 8.1 Objetos de estudo
-Os principais objetos de estudo deste experimento são os Pull Requests (PRs) produzidos pelas equipes durante o desenvolvimento dos projetos acadêmicos. Cada PR será tratado como uma unidade de análise, incluindo: o código-fonte modificado (arquivos alterados, funções/métodos novos ou refatorados), o diff entre o branch de origem e a branch principal, os metadados do PR (autor, data de abertura, data de merge, tamanho em linhas adicionadas/removidas), os comentários de revisão associados (quando houver), os eventos de aprovação/reprovação e o histórico de commits vinculados a esse PR.
+Os principais objetos de estudo deste experimento são os **Pull Requests (PRs)** produzidos pelas equipes durante o desenvolvimento dos projetos acadêmicos. Cada PR será tratado como uma unidade de análise, incluindo: o código-fonte modificado (arquivos alterados, funções/métodos novos ou refatorados), o diff entre o branch de origem e a branch principal, os metadados do PR (autor, data de abertura, data de merge, tamanho em linhas adicionadas/removidas), os comentários de revisão associados (quando houver), os eventos de aprovação/reprovação e o histórico de commits vinculados a esse PR.
 
-Além dos PRs em si, serão analisadas as issues de bug relacionadas a esses PRs (especialmente aquelas abertas após o merge), usadas para medir defeitos pós-integração e severidade dos problemas reportados. Para complementar a análise quantitativa, também serão considerados como objetos de estudo os relatórios de análise estática de código (métricas de complexidade, duplicação, code smells, vulnerabilidades) e as respostas aos questionários aplicados aos participantes, que capturam percepções de aprendizado, sobrecarga e qualidade das revisões.
+Além dos PRs em si, serão analisadas as **issues de bug** relacionadas a esses PRs (especialmente aquelas abertas após o merge), usadas para medir defeitos pós-integração e severidade dos problemas reportados. Para complementar a análise quantitativa, também serão considerados como objetos de estudo os relatórios de análise estática de código (métricas de complexidade, duplicação, code smells, vulnerabilidades) e as **respostas aos questionários aplicados aos participantes**, que capturam percepções de aprendizado, sobrecarga e qualidade das revisões.
 
 ### 8.2 Sujeitos / participantes (visão geral)
 Os sujeitos deste experimento serão estudantes de graduação em Engenharia de Software matriculados em disciplinas de desenvolvimento de software que utilizam projetos em equipe com versionamento no GitHub. Esses estudantes atuarão principalmente como desenvolvedores (autores de Pull Requests) e revisores de código (avaliando PRs de colegas), acumulando, na prática, ambos os papéis ao longo do semestre.
@@ -403,21 +410,21 @@ Os estudantes estarão organizados em equipes de 3 a 6 integrantes (2-3 equipes 
 
 ## 9. Desenho experimental
 
-### 9.1 Tipo de desenho (completamente randomizado, blocos, fatorial, etc.)
-O desenho escolhido é um **quasi-experimento de campo** com grupo controle não equivalente, em arranjo **between-subjects** e randomização ao nível de equipe (cluster).
+### 9.1 Tipo de desenho
+O desenho escolhido é um **quasi-experimento de campo**, com **grupo controle não equivalente**, em arranjo **between-subjects** e **randomização ao nível de equipe**.
 
-Primeiro, o arranjo between-subjects é necessário porque cada equipe ficará exposta apenas a uma condição ao longo de todo o semestre: ou Code Review obrigatório (Grupo B) ou Code Review opcional/não obrigatório (Grupo A). Se o mesmo grupo passasse pelos dois tratamentos (within-subjects), haveria um efeito de aprendizado irreversível: uma vez que a equipe aprende a revisar código de forma estruturada, é praticamente impossível “desaprender” a prática. Além disso, não existe um período de washout viável em disciplina semestral, e os efeitos de ordem (primeiro A depois B, ou o contrário) seriam confundidores críticos.
+O arranjo *between-subjects* é adotado porque cada equipe ficará exposta a **apenas uma condição** ao longo de todo o semestre: ou **Code Review obrigatório** (Grupo B) ou **Code Review opcional/não obrigatório** (Grupo A). Em outras palavras, cada equipe “vive em um único cenário” durante o experimento. Se a mesma equipe passasse pelos dois tratamentos (*within-subjects*), haveria um efeito de aprendizado irreversível: uma vez que os alunos aprendem a revisar código de forma estruturada, é praticamente impossível “desaprender” a prática. Além disso, em uma disciplina semestral, não há um período de *washout* viável, e os efeitos de ordem (primeiro A depois B, ou o contrário) se tornariam confundidores sérios.
 
-Segundo, trata-se de um quasi-experimento porque, embora exista randomização, ela não é feita sobre indivíduos isolados, e sim sobre grupos intactos já formados pela disciplina (equipes de projeto). Há restrições institucionais importantes: as equipes já estão constituídas, horários são fixos, as turmas são pré-estabelecidas. A randomização ocorre no nível da equipe (cluster), o que exige controle estatístico cuidadoso de variáveis preexistentes, como experiência em programação, familiaridade com Git/GitHub, tamanho da equipe e complexidade do projeto.
+Trata-se de um **quasi-experimento** porque, embora exista randomização, ela não é feita sobre indivíduos isolados, e sim sobre **grupos intactos** já formados pela disciplina (equipes de projeto). Há restrições institucionais importantes: as equipes já estão constituídas, horários são fixos e as turmas são pré-estabelecidas. Por isso, a randomização ocorre no nível da equipe, o que exige **controle estatístico cuidadoso** de variáveis preexistentes, como experiência em programação, familiaridade com Git/GitHub, tamanho da equipe e complexidade do projeto.
 
-Por fim, a presença de um grupo controle é essencial para isolar o efeito específico da política de Code Review em relação a outros fatores que também podem influenciar a qualidade do código e o processo (maturação dos estudantes ao longo do semestre, efeito Hawthorne, eventos externos do curso). Sem um grupo controle que trabalhe em condições semelhantes, mas sem a obrigatoriedade de revisão, seria muito mais difícil atribuir qualquer melhoria observada diretamente ao tratamento (Code Review obrigatório).
-
+A presença de um **grupo controle** é essencial para isolar o efeito específico da política de Code Review em relação a outros fatores que também podem influenciar a qualidade do código e o processo, como **maturação dos estudantes ao longo do semestre**, **efeito Hawthorne** e **eventos externos da disciplina**. Sem um grupo controle trabalhando em condições semelhantes, mas sem a obrigatoriedade de revisão, seria muito mais difícil atribuir qualquer melhoria observada diretamente ao tratamento (Code Review obrigatório).
 
 ### 9.2 Randomização e alocação
 A randomização será feita no nível das equipes, e não dos indivíduos. Equipes completas de desenvolvimento serão aleatoriamente alocadas ao grupo controle (A) ou ao grupo experimental (B). A unidade de randomização, portanto, é a própria equipe, que será exposta a apenas um dos dois níveis de tratamento: Code Review obrigatório ou Code Review opcional.
 
-Na prática, o procedimento seguirá três passos: primeiro, listar todas as equipes elegíveis para o experimento; em seguida, aplicar um método de alocação aleatória (por exemplo, sorteio simples ou uso de um gerador de números aleatórios) para designar cada equipe ao Grupo A (controle) ou ao Grupo B (experimental), buscando manter o balanceamento numérico entre eles (cerca de 2–3 equipes por grupo); por fim, verificar o resultado dessa alocação por meio de uma análise estatística inicial das variáveis de controle (como experiência prévia em programação e tamanho da equipe), de modo a avaliar se os grupos ficaram razoavelmente equilibrados. Caso se observem assimetrias relevantes, essas variáveis serão posteriormente consideradas como covariáveis na análise dos resultados.
+No contexto deste estudo, as equipes não são formadas especificamente para o experimento, mas aproveitam a organização já existente nas disciplinas de desenvolvimento de software da graduação. Em cada turma participante, os estudantes são distribuídos em equipes de 3 a 6 integrantes (seja por alocação do professor, seja por autoformação dos alunos) para desenvolver um projeto colaborativo ao longo do semestre, utilizando um repositório no GitHub por equipe. Esses times de projeto, já constituídos por razões pedagógicas, são então utilizados como unidades de randomização: cada equipe inteira é sorteada para o grupo controle ou experimental, preservando a forma natural de trabalho da disciplina.
 
+Na prática, o procedimento seguirá três passos: primeiro, listar todas as equipes elegíveis para o experimento; em seguida, aplicar um método de alocação aleatória (por exemplo, sorteio simples ou uso de um gerador de números aleatórios) para designar cada equipe ao Grupo A (controle) ou ao Grupo B (experimental), buscando manter o balanceamento numérico entre eles (cerca de 2–3 equipes por grupo); por fim, verificar o resultado dessa alocação por meio de uma análise estatística inicial das variáveis de controle (como experiência prévia em programação e tamanho da equipe), de modo a avaliar se os grupos ficaram razoavelmente equilibrados. Caso se observem assimetrias relevantes, essas variáveis serão posteriormente consideradas como covariáveis na análise dos resultados.
 
 ### 9.3 Balanceamento e contrabalanço
 O balanceamento é crucial para garantir que as diferenças observadas no final sejam causadas pelo tratamento (Code Review) e não por diferenças iniciais.
