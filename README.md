@@ -439,7 +439,6 @@ O Contrabalanço não é aplicável neste desenho, pois ele é usado em desenhos
 O experimento será executado ao longo de um único período contínuo de 16 semanas (Restrição R1), que engloba o semestre letivo completo. Dentro desse intervalo, a intervenção propriamente dita, isto é, a aplicação da regra de branch protection no grupo experimental, permanecerá ativa durante todo o período de desenvolvimento efetivo, estimado em aproximadamente 12 a 14 semanas. As “sessões” de trabalho são os ciclos de desenvolvimento (sprints semanais ou quinzenais) nos quais as equipes criam e fazem merge de Pull Requests. O número de PRs gerados ao longo desses ciclos (estimado entre 60 e 80 PRs no total) é o que definirá, na prática, o tamanho amostral disponível para análise estatística. A coleta contínua durante todo o semestre permite capturar a dinâmica completa de desenvolvimento das equipes e o efeito da maturação dos participantes (L2) em ambos os grupos, produzindo um retrato mais realista do impacto do Code Review na qualidade do software em um contexto de projeto acadêmico de médio prazo.
 
 
-
 ## 10. População, Sujeitos e Amostragem
 
 ### 10.1 População-alvo
@@ -465,13 +464,19 @@ Os participantes devem atender aos seguintes critérios mínimos:
 
 ### 10.4 Tamanho da Amostra Planejado (por Grupo)
 
-O tamanho da amostra é uma limitação (R2) definida pela disponibilidade de turmas no semestre.
+O tamanho da amostra é uma limitação (R2) definida principalmente pela quantidade de turmas e equipes disponíveis no semestre. A ideia é **trabalhar com o máximo de PRs possível dentro da realidade da disciplina**, sem propor um número irrealista para o contexto acadêmico.
 
-- **Unidade de Análise (PRs):** Mínimo de **60 a 80 PRs** no total (30–40 por grupo), garantindo **poder estatístico razoável** (Cohen's d ≥ 0,5).  
-- **Unidade de Alocação (Equipes):** De **4 a 6 equipes** no total (2–3 por grupo).  
-- **Participantes (Sujeitos):** De **12 a 18 sujeitos por grupo**, totalizando entre **24 e 36 participantes**, conforme o tamanho das equipes.
+- **Unidade de Análise (PRs):**  
+  Pretende-se obter um mínimo de **60 a 80 Pull Requests no total** (aproximadamente 30–40 por grupo). Esse volume é considerado suficiente para alcançar um **poder estatístico razoável** para detectar efeitos de magnitude moderada (Cohen’s d ≥ 0,5), mesmo levando em conta que os dados estão agrupados por equipe.
 
->  A decisão é baseada na viabilidade (R2) e no princípio de maximizar o número de observações (PRs) dentro das restrições temporais e logísticas.
+- **Unidade de Alocação (Equipes):**  
+  As equipes são a unidade em que o tratamento é aplicado. Estima-se trabalhar com **4 a 6 equipes no total**, distribuídas em **2–3 equipes por grupo** (controle e experimental). Em termos práticos, cada time contribui com vários PRs ao longo do semestre, o que ajuda a compor o número total de observações.
+
+- **Participantes (Sujeitos):**  
+  Considerando equipes de 3 a 6 integrantes, espera-se ter entre **12 e 18 sujeitos por grupo**, totalizando aproximadamente **24 a 36 participantes** no experimento. Esse número reflete a realidade das turmas e é suficiente para observar padrões de comportamento e percepção entre grupos com e sem Code Review obrigatório.
+
+> Em resumo, a decisão de amostra equilibra **viabilidade prática** (R2) e a busca por um número de PRs que permita analisar diferenças entre os grupos com algum grau de confiança, **maximizando o número de observações dentro das restrições temporais e logísticas do semestre.**
+
 
 ### 10.5 Método de Seleção / Recrutamento
 
@@ -510,7 +515,7 @@ Para garantir nivelamento e reduzir viés técnico:
 
 
 
-### 11.2 Materiais de Suporte (instruções, guias)
+### 11.2 Materiais de Suporte 
 
 - **TCLE:** Documento de consentimento (P1).
 - **Guia de Workflow e Regras:** Instruções detalhando o fluxo de desenvolvimento do projeto e as convenções de código (P3).
@@ -520,7 +525,7 @@ Para garantir nivelamento e reduzir viés técnico:
 
 ---
 
-### 11.3 Procedimento Experimental (protocolo – visão passo a passo)
+### 11.3 Procedimento Experimental
 
 O experimento será dividido em fases operacionais ao longo das 16 semanas.
 
@@ -546,7 +551,7 @@ O experimento será dividido em fases operacionais ao longo das 16 semanas.
 
 
 
-### 11.4 Plano de Piloto (escopo e critérios de ajuste)
+### 11.4 Plano de Piloto 
 
 Será realizado um piloto de curta duração (1–2 semanas), envolvendo uma amostra muito pequena de equipes ou alunos de uma turma anterior (se possível), ou nas primeiras semanas do semestre.
 
@@ -559,9 +564,9 @@ Será realizado um piloto de curta duração (1–2 semanas), envolvendo uma amo
 
 ---
 
-## 12. Plano de Análise de Dados (pré-execução)
+## 12. Plano de Análise de Dados
 
-### 12.1 Estratégia Geral de Análise (como responderá às questões)
+### 12.1 Estratégia Geral de Análise
 
 A estratégia central é a **comparação estatística** das métricas de resultado entre o **Grupo A** e o **Grupo B** para validar as hipóteses direcionais (H1).
 
@@ -583,41 +588,55 @@ Será adotada uma **abordagem multinível**, com três estratégias complementar
 
 #### 12.2.1 Análise primária: Modelos Lineares Mistos (LMM)
 
-Esta é a abordagem mais robusta para **dados agrupados**, aproveitando ao máximo o poder estatístico do conjunto de dados total (60–80 PRs).
+A análise primária será feita com **Modelos Lineares Mistos (LMM)**, que são mais adequados para **dados agrupados por equipe**, como é o caso deste experimento. Em vez de fingir que cada PR é totalmente independente, o LMM leva em conta que PRs da mesma equipe tendem a se parecer mais entre si do que com PRs de outras equipes.  
+> Em outras palavras, é aqui que eu mostro que não vou “enganar” a estatística tratando PR de um mesmo time como se fosse de pessoas totalmente independentes.
 
 - **Estrutura do modelo:**  
-  - Serão utilizados **Modelos Lineares Mistos (LMM)** para métricas contínuas (M01, M05, M07, M11).  
-  - A **Equipe** será incluída como **efeito aleatório (random intercept)**, controlando a não-independência das observações dentro de cada cluster.
+  - Serão utilizados **LMMs** para as métricas contínuas mais importantes (por exemplo, M01 – Complexidade, M05 – Manutenibilidade, M07 – Densidade de Defeitos, M11 – Tempo até o Merge).  
+  - A **Equipe** será incluída como **efeito aleatório (random intercept)**, justamente para capturar essa variação “entre equipes” e controlar a não-independência das observações dentro de cada cluster.
 
 - **Controle de covariáveis:**  
-  - Variáveis de controle coletadas no início (Experiência, Tamanho da Equipe) serão incluídas no modelo como **efeitos fixos**, em uma função análoga à **ANCOVA**, ajustando o efeito do tratamento por eventuais desbalanceamentos iniciais.
+  - Variáveis de controle coletadas no início, como **experiência prévia em programação** e **tamanho da equipe**, serão incluídas no modelo como **efeitos fixos**.  
+  - Isso permite **ajustar o efeito do tratamento** (Code Review obrigatório) caso os grupos não fiquem perfeitamente balanceados após a randomização (por exemplo, se um grupo acabar com equipes mais experientes).
 
 - **Requisito de uso:**  
-  - Esta abordagem será utilizada como **análise primária** se:
-    - o **N total de PRs for ≥ 60**, e  
-    - houver PRs suficientes por equipe (idealmente **≥ 10 PRs/equipe**).
-
+  - Essa abordagem será utilizada como **análise primária** desde que:
+    - o **número total de PRs** seja de pelo menos **60 PRs**; e  
+    - cada equipe contribua com uma quantidade mínima de dados, idealmente **10 PRs ou mais por equipe**.  
+  - Se esses requisitos não forem atendidos, os LMMs ainda podem ser utilizados de forma exploratória, mas os resultados serão interpretados com maior cautela.
+ 
+  
 #### 12.2.2 Análise de sensibilidade: agregação por equipe
-
-Esta abordagem servirá como **análise de validação conservadora** para as métricas mais críticas.
+Como forma de **verificar e validar** os resultados obtidos pelos modelos multinível, será realizada uma **análise de sensibilidade** baseada na **agregação por equipe**. Essa estratégia funciona como um “segundo olhar”, mais conservador, para checar se as conclusões se mantêm mesmo com uma suposição bem mais rígida de independência.  
 
 - **Unidade de análise:**  
-  - A unidade de análise será agregada ao nível da **Equipe** (N ≈ 4–6).
+  - Em vez de analisar PR a PR, as métricas serão **agregadas ao nível da equipe**, produzindo um valor resumo por time.  
+  - Isso resulta em um **N bem pequeno (≈ 4–6 equipes)**, mas com **independência completa entre observações**, já que cada equipe passa a ser uma unidade isolada.
 
 - **Teste estatístico:**  
-  - Será utilizado o **Teste de Mann-Whitney U** (não-paramétrico) para comparar as **médias ou medianas agregadas** das métricas entre o **Grupo A** e o **Grupo B**.
+  - Para comparar as métricas agregadas entre o **Grupo A (controle)** e o **Grupo B (experimental)**, será utilizado o **Teste de Mann-Whitney U**, que é **não-paramétrico** e não depende da suposição de normalidade dos dados.  
+  - Esse teste será aplicado sobre as **médias ou medianas por equipe** das métricas de maior interesse, como qualidade, defeitos e tempo até o merge.
 
-- **Função:**  
-  - Embora reduza drasticamente o **poder estatístico**, essa abordagem:
-    - garante **independência completa** das observações; e  
-    - oferece uma interpretação **mais conservadora** dos resultados.
+- **Função na análise geral:**  
+  - Embora essa abordagem **reduza bastante o poder estatístico** (porque o número de equipes é pequeno), ela:
+    - garante **independência total** entre as unidades analisadas; e  
+    - fornece uma visão **mais conservadora** dos resultados, servindo como checagem: se o padrão observado nos LMMs também aparece aqui, a confiança nas conclusões aumenta.
+
 
 #### 12.2.3 Análise de confirmação: ajuste robusto de erro-padrão
 
-Serão realizados **testes t simples** com **ajuste de erros-padrão robustos por cluster** (*cluster-robust standard errors* – Correção de Huber-White) para:
+Além dos modelos mistos e da agregação por equipe, será conduzida uma **análise de confirmação** utilizando **testes t simples** com **ajuste de erros-padrão robustos por cluster**.  
 
-- **validar os resultados dos LMMs**; e  
-- garantir que a **correção para clustering** está sendo aplicada, mesmo em estruturas multinível mais simples.
+- **Objetivo principal:**  
+  - Verificar se as conclusões sobre diferenças entre **Grupo A** e **Grupo B** se mantêm mesmo quando usamos uma estrutura de teste mais simples, porém ajustada para clustering.
+
+- **Estratégia técnica:**  
+  - Serão ajustados **testes t para comparação de médias** entre os grupos, porém com **erros-padrão corrigidos por cluster de equipe**.  
+  - Essa correção robusta compensa o fato de que os PRs do mesmo time são mais parecidos entre si do que com PRs de outros times, evitando subestimação artificial da variabilidade.
+
+- **Papel na robustez geral:**  
+  - Se os resultados dos LMMs e dos testes t com erro-padrão robusto convergirem para a mesma interpretação (mesmo sinal de efeito e mesma direção de diferença entre grupos), isso **reforça a confiança** nas conclusões.  
+  - Em outras palavras, essa etapa funciona como um **“segundo carimbo de conferência”**: um método mais simples, mas estatisticamente cuidadoso, confirmando o padrão observado na análise principal.
 
 #### 12.2.4 Resumo dos métodos por tipo de métrica
 
@@ -632,15 +651,17 @@ Serão realizados **testes t simples** com **ajuste de erros-padrão robustos po
 Em caso de **resultados divergentes** entre:
 
 - a análise **multinível** (LMM), e  
-- a análise **agregada por equipe**,
+- a análise **agregada por equipe**,  
 
 a interpretação irá:
 
 - **priorizar a análise multinível (LMM)**, por:
-  - ter **maior poder estatístico**; e  
-  - tratar corretamente a **estrutura hierárquica dos dados**;
+  - ter **maior poder estatístico**, aproveitando melhor o conjunto total de PRs; e  
+  - tratar corretamente a **estrutura hierárquica dos dados** (PRs dentro de equipes), que é a forma como os dados são realmente gerados no experimento.
 
-mas **também reportará** explicitamente o resultado **mais conservador** (agregado).
+Ao mesmo tempo, a análise agregada por equipe será usada como um **piso conservador**: seus resultados também serão sempre reportados, funcionando como uma checagem de robustez.  
+
+Em outras palavras, se os dois métodos “contarem a mesma história”, isso reforça a confiança nas conclusões; se divergirem, o LMM será tomado como análise principal, mas as limitações e diferenças observadas serão explicitamente discutidas no texto.
 
 
 #### 12.2.6 Nota sobre múltiplas comparações e tamanho do efeito
@@ -662,8 +683,7 @@ mas **também reportará** explicitamente o resultado **mais conservador** (agre
 
 - **Outliers:** Valores extremos (ex: PRs com tempo de merge de 3 meses, M11) serão identificados. Em vez de excluir, será priorizada a transformação logarítmica ou o uso de testes não-paramétricos (Mann-Whitney U), que são menos sensíveis a outliers, mitigando a perda de poder.
 
-
-### 12.4 Plano de Análise para Dados Qualitativos (se houver)
+### 12.4 Plano de Análise para Dados Qualitativos
 
 Os comentários de revisão (M13) e as respostas abertas do questionário serão tratados como **dados qualitativos** para contextualizar os achados quantitativos.
 
@@ -680,7 +700,7 @@ Refere-se à capacidade de inferir corretamente se o **Code Review obrigatório*
 
 | Ameaça                   | Descrição do Risco                                                                                                                                             | Estratégia de Mitigação                                                                                                                                               |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Baixo Poder Estatístico  | O tamanho amostral limitado (R2) de 60–80 PRs no total pode não ser suficiente para detectar efeitos reais de magnitude pequena ou moderada.                    | **Mitigação principal:** Focar a análise no **tamanho do efeito** (ex.: Cohen's d ou Cliff's Delta) e não apenas no valor de *p*, conforme definido na Seção 7.3.     |
+| Baixo Poder Estatístico  | O tamanho amostral limitado (R2) de 60–80 PRs no total pode não ser suficiente para detectar efeitos reais de magnitude pequena ou moderada.                    | **Mitigação principal:** Focar a análise no **tamanho do efeito** (ex.: Cohen's d) e não apenas no valor de *p*, conforme definido na Seção 7.3.     |
 | Violação de Suposições   | Os dados de processo (Tempo de Merge, Densidade de Defeitos) e os dados de código geralmente não seguem uma distribuição normal.                                | **Estratégia:** Priorizar **testes não-paramétricos** (ex.: Mann-Whitney U) e usar **transformação logarítmica** em métricas de tempo.                               |
 | Pesca e Taxa de Erro     | Múltiplos testes de hipóteses (12 no total) aumentam a chance de encontrar um resultado falso-positivo por acaso (inflação do Erro Tipo I).                    | **Mitigação:** Interpretar os valores de *p* com cautela e exigir **consistência de resultados entre métricas relacionadas** (ex.: Q1.1 e Q1.3).                      |
 
